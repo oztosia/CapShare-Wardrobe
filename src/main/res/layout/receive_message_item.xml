@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+   >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:padding="15dp"
+            android:background="@drawable/receive_message_background"
+            android:text="When parsing the item_message_send.xml file, you will notice that a message variable of type Message has been declared in it and the content of the text property has been assigned to the application’s unique TextView"
+            android:textColor="@android:color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.45" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

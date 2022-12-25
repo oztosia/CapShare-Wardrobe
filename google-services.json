@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "673271030911",
+    "project_id": "mypersonalwardrobe-6d67f",
+    "storage_bucket": "mypersonalwardrobe-6d67f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673271030911:android:216636dff953e603c38b4a",
+        "android_client_info": {
+          "package_name": "com.example.mypersonalwardrobe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "673271030911-54i2g16mptq6ekvvp4s8k7omrn3oenrv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2HpFQXEN8eq_FMFGCgwc4Z_huCaVEdec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "673271030911-54i2g16mptq6ekvvp4s8k7omrn3oenrv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

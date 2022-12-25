@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MyPersonalWardrobe</string>
+    <string name = "sign_in"><u> Masz już konto? Zaloguj się</u></string>
+    <string name = "sign_up"><u>Nie masz konta? Zarejestruj się</u></string>
+</resources>
