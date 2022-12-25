@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/SignInFragment">
+
+    <!-- authentication fragments ui -->
+
+    <fragment
+        android:id="@+id/SignInFragment"
+        android:name="com.example.mypersonalwardrobe.ui.auth.SignInFragment"
+        tools:layout="@layout/fragment_sign_in">
+
+        <action
+            android:id="@+id/action_SignInFragment_to_HomeFragment"
+            app:destination="@+id/HomeFragment" />
+
+        <action
+            android:id="@+id/action_SignInFragment_to_SignUpFragment"
+            app:destination="@+id/SignUpFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/SignUpFragment"
+        android:name="com.example.mypersonalwardrobe.ui.auth.SignUpFragment"
+        tools:layout="@layout/fragment_sign_up">
+
+        <action
+            android:id="@+id/action_SignUpFragment_to_HomeFragment"
+            app:destination="@+id/HomeFragment" />
+        <action
+            android:id="@+id/action_SignUpFragment_to_SignInFragment"
+            app:destination="@+id/SignInFragment" />
+
+
+    </fragment>
+
+    <!-- home ui -->
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.example.mypersonalwardrobe.ui.home.HomeFragment"
+        android:label="Home fragment"
+        tools:layout="@layout/fragment_home">
+
+
+        <action
+            android:id="@+id/action_HomeFragment_to_MyProfileFragment"
+            app:destination="@+id/MyProfileFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_SignInFragment"
+            app:destination="@+id/SignInFragment" />
+
+
+
+        <action
+            android:id="@+id/action_HomeFragment_to_GalleryFragment"
+            app:destination="@+id/GalleryFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_OutfitsFragment"
+            app:destination="@+id/OutfitsFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_AskForOutfitFragment"
+            app:destination="@+id/AskForOutfitFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_UsersListFragment"
+            app:destination="@+id/UsersListFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_ManageContentFragment"
+            app:destination="@+id/ManageContentFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_AddPostFragment"
+            app:destination="@+id/AddPostFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/AddPostFragment"
+        android:name="com.example.mypersonalwardrobe.ui.addPost.AddPostFragment"
+        tools:layout="@layout/fragment_add_post">
+
+        <action
+            android:id="@+id/action_AddPostFragment_to_photoBottomSheet"
+            app:destination="@id/photoBottomSheet" />
+        <action
+            android:id="@+id/action_AddPostFragment_to_SinglePhotoFragment"
+            app:destination="@id/SinglePhotoFragment" />
+    </fragment>
+
+    <!-- MY PROFILE -->
+    <fragment
+        android:id="@+id/MyProfileFragment"
+        android:name="com.example.mypersonalwardrobe.ui.profile.MyProfileFragment"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_myProfileFragment_to_photoBottomSheet"
+            app:destination="@id/photoBottomSheet" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ViewProfileFragment"
+        android:name="com.example.mypersonalwardrobe.ui.profile.ViewProfileFragment"
+        tools:layout="@layout/fragment_profile">
+    </fragment>
+
+    <!-- ITEMS -->
+
+    <fragment
+        android:id="@+id/GalleryFragment"
+        android:name="com.example.mypersonalwardrobe.ui.items.GalleryFragment"
+        tools:layout="@layout/fragment_base_recyclerview_with_search">
+        <action
+            android:id="@+id/action_GalleryFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+        <action
+            android:id="@+id/action_GalleryFragment_to_SinglePhotoFragment"
+            app:destination="@id/SinglePhotoFragment" />
+        <action
+            android:id="@+id/action_galleryFragment_to_photoBottomSheet"
+            app:destination="@id/photoBottomSheet"
+            app:popUpTo="@id/GalleryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/SinglePhotoFragment"
+        android:name="com.example.mypersonalwardrobe.ui.items.SinglePhotoFragment"
+        tools:layout="@layout/fragment_single_photo">
+    </fragment>
+
+    <!-- ADD IMAGE -->
+
+    <dialog
+        android:id="@+id/photoBottomSheet"
+        android:name="com.example.mypersonalwardrobe.ui.addImage.PhotoBottomSheet">
+
+        <action
+            android:id="@+id/action_photoBottomSheet_to_newPhotoFragment"
+            app:destination="@id/NewPhotoFragment" />
+
+    </dialog>
+
+    <fragment
+        android:id="@+id/NewPhotoFragment"
+        android:name="com.example.mypersonalwardrobe.ui.addImage.NewPhotoFragment"
+        tools:layout="@layout/fragment_new_photo">
+    </fragment>
+
+    <!-- OUTFITS -->
+    <fragment
+        android:id="@+id/OutfitsFragment"
+        android:name="com.example.mypersonalwardrobe.ui.outfits.OutfitsFragment"
+        tools:layout="@layout/fragment_outfits">
+    </fragment>
+    <!-- ASK FOR OUTFIT -->
+    <fragment
+        android:id="@+id/AskForOutfitFragment"
+        android:name="com.example.mypersonalwardrobe.ui.outfits.AskForOutfitFragment"
+        tools:layout="@layout/fragment_base_recyclerview_with_search">
+
+        <!-- single item view -->
+    </fragment>
+
+    <!-- CONTACTS -->
+
+    <fragment
+        android:id="@+id/UsersListFragment"
+        android:name="com.example.mypersonalwardrobe.ui.usersList.UsersListFragment"
+        tools:layout="@layout/fragment_base_recyclerview_with_search">
+
+        <action
+            android:id="@+id/action_UsersListFragment_to_ViewProfileFragment"
+            app:destination="@id/ViewProfileFragment" />
+
+    </fragment>
+
+
+    <!-- PREFERENCES -->
+
+    <fragment
+        android:id="@+id/PreferencesFragment"
+        android:name="com.example.mypersonalwardrobe.ui.preferences.PreferencesFragment"
+        tools:layout="@layout/fragment_preferences">
+    </fragment>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <fragment
+        android:id="@+id/ChatFragment"
+        android:name="com.example.mypersonalwardrobe.ui.chat.ChatFragment">
+    </fragment>
+
+
+</navigation>
