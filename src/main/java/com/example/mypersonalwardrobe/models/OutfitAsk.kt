@@ -1,14 +1,20 @@
 package com.example.mypersonalwardrobe.models
 
-import java.util.*
-import kotlin.collections.ArrayList
+import org.parceler.Parcel
+import org.parceler.ParcelConstructor
+
+@Parcel(Parcel.Serialization.BEAN)
 
 data class OutfitAsk(
-    var date: Date, // vm
+    var date: String, // vm
+    var id: String,
     var authorUid: String, //vm
-    var hashtagsList: ArrayList<String>, // convert to list from string
+    var hashtags: String, // convert to list from string
     var title: String, //m
     var text: String, // m
-    var imagesList: ArrayList<Photo> //m
 ){
+    @ParcelConstructor
+    constructor(): this("", "",
+        "", "", "", "")
+
 }

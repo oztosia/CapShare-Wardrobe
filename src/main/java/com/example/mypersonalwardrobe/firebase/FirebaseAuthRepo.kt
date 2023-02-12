@@ -1,7 +1,5 @@
 package com.example.mypersonalwardrobe.firebase
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.mypersonalwardrobe.MyPersonalWardrobe

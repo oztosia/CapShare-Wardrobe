@@ -29,9 +29,21 @@
                     app:layout_constraintEnd_toEndOf="@id/recyclerImageView"
                     app:layout_constraintBottom_toBottomOf="@id/recyclerImageView" />
 
+                <ImageView
+                    android:id="@+id/empty_check_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_outline_fiber_manual_record_24"
+                    app:layout_constraintEnd_toEndOf="@id/recyclerImageView"
+                    app:layout_constraintBottom_toBottomOf="@id/recyclerImageView" />
 
-
-
+                <ImageView
+                    android:id="@+id/check_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_baseline_filled_fiber_manual_record_24"
+                    app:layout_constraintEnd_toEndOf="@id/recyclerImageView"
+                    app:layout_constraintBottom_toBottomOf="@id/recyclerImageView" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

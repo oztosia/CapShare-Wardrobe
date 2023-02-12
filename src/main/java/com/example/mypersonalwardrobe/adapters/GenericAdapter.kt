@@ -4,28 +4,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
+import android.widget.Filterable
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypersonalwardrobe.adapters.viewholders.GenericViewHolder
+import com.google.gson.Gson
 
 
 class GenericAdapter<T>(private val viewHolderFactory: (view: View) -> GenericViewHolder<T>,
-                        var dataSet: ArrayList<T>,
                         @LayoutRes val layout: Int)
-    : RecyclerView.Adapter<GenericViewHolder<T>>() {
+    : RecyclerView.Adapter<GenericViewHolder<T>>(), Filterable {
 
+    var dataSet: ArrayList<T> = arrayListOf()
     var sortedArray: ArrayList<T> = arrayListOf()
 
     init {
         sortedArray = dataSet
     }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenericViewHolder<T> {
         val v = LayoutInflater.from(parent.context).inflate(layout, parent, false)
+        //val lifecycleOwner = parent.context as LifecycleOwner
         return viewHolderFactory(v)
     }
+
 
     override fun onBindViewHolder(holder: GenericViewHolder<T>, position: Int) {
         holder.bind(sortedArray[position])
@@ -34,7 +36,8 @@ class GenericAdapter<T>(private val viewHolderFactory: (view: View) -> GenericVi
 
     override fun getItemCount(): Int = sortedArray.size
 
-    fun getFilter(): Filter {
+
+    override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charString = constraint?.toString() ?: ""
@@ -42,7 +45,8 @@ class GenericAdapter<T>(private val viewHolderFactory: (view: View) -> GenericVi
                     val filteredList = ArrayList<T>()
                     dataSet
                         .filter {
-                            (it.toString().contains(constraint!!))
+                            val gson = Gson()
+                            (gson.toJson(it).toString().contains(constraint!!))
                         }
                         .forEach { filteredList.add(it) }
                     sortedArray = filteredList
@@ -63,4 +67,6 @@ class GenericAdapter<T>(private val viewHolderFactory: (view: View) -> GenericVi
             }
         }
     }
+
+
 }

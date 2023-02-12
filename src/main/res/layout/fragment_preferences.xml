@@ -1,6 +1,186 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.mypersonalwardrobe.viewmodels.PreferencesViewModel" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="#E8E9EC"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.06" />
+
+    <ImageView
+        android:id="@+id/observe_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_baseline_live_help_24"
+        app:layout_constraintStart_toStartOf="@id/card_view"
+        app:layout_constraintTop_toBottomOf="@id/guideline4"/>
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_percent="0.7"
+        android:background="@drawable/card_view_background"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.2" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.95" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <TextView
+                android:id="@+id/observed_hashtags_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="obserwuj hashtagi"
+                android:layout_marginBottom="6dp"
+                android:textColor="@color/darkButtonBackground"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/observed_hashtags_edit_text"
+                app:layout_constraintLeft_toRightOf="@id/guideline3"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/observed_hashtags_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintWidth_percent="0.8"
+                app:layout_constraintHeight_percent="0.2"
+                android:background="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/observed_hashtags_text_view"/>
+
+
+            <EditText
+        android:id="@+id/observed_hashtags_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+                app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintWidth_percent="0.8"
+                android:background="#102196F3"
+        android:inputType="textMultiLine"
+                android:gravity="top"
+                android:hint="..."
+        android:text="@{viewModel.observedHashtagsMutableLiveData}"
+        android:textColor="@color/darkButtonBackground"
+        android:textColorHint="@color/darkButtonBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline1"
+                android:visibility="gone"
+        />
+
+            <TextView
+                android:id="@+id/blocked_hashtags_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="blokuj hashtagi"
+                android:layout_marginBottom="6dp"
+                android:textColor="@color/darkButtonBackground"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/blocked_hashtags_edit_text"
+                app:layout_constraintLeft_toRightOf="@id/guideline3"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/blocked_hashtags_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintWidth_percent="0.8"
+                app:layout_constraintHeight_percent="0.2"
+                android:background="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/blocked_hashtags_text_view" />
+
+
+            <EditText
+        android:id="@+id/blocked_hashtags_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+                app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintWidth_percent="0.8"
+        android:background="#102196F3"
+        android:inputType="textMultiLine"
+                android:gravity="top"
+                android:hint="..."
+        android:text="@{viewModel.blockedHashtagsMutableLiveData}"
+        android:textColor="@color/darkButtonBackground"
+        android:textColorHint="@color/darkButtonBackground"
+                android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/observed_hashtags_edit_text"
+        />
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/edit_mode_button"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:elevation="20dp"
+                android:background="@drawable/search_view_background"
+                android:tint="@color/darkButtonBackground"
+                app:srcCompat="@drawable/ic_baseline_edit_24"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/guideline2"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/confirm_button"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:elevation="20dp"
+                android:visibility="gone"
+                android:background="@drawable/search_view_background"
+                android:tint="@color/darkButtonBackground"
+                app:srcCompat="@drawable/ic_baseline_check_24"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/guideline2"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

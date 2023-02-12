@@ -26,9 +26,9 @@ class SignInFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         authViewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
         _binding = FragmentSignInBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -65,6 +65,15 @@ class SignInFragment : Fragment() {
             ) { firebaseUser ->
                 if (firebaseUser != null && firebaseUser.isEmailVerified) {
                     findNavController().navigate(R.id.action_SignInFragment_to_HomeFragment)
+                }
+                else if (!firebaseUser.isEmailVerified){
+                    firebaseUser.sendEmailVerification()
+                    Toast.makeText(
+                        context,
+                        "Na podany adres email wysłany został link weryfikacyjny.",
+                        Toast.LENGTH_LONG
+                    ).show()
+
                 }
             }
         }

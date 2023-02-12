@@ -1,37 +1,42 @@
 package com.example.mypersonalwardrobe.firebase
 
 import GenericAdapter
-import android.net.Uri
 import android.widget.ProgressBar
-import com.example.mypersonalwardrobe.adapters.PostImageRecyclerAdapter
+import androidx.core.net.toUri
 import com.example.mypersonalwardrobe.constants.FirebasePathsConstants
-import com.example.mypersonalwardrobe.models.Post
-import kotlin.collections.ArrayList
+import com.example.mypersonalwardrobe.helpers.ItemsListHolder.ItemsListHolder.list
+import java.util.*
 
 class FirebasePostsRepo: FirebaseGenericRepo(){
 
-    var uriList: ArrayList<Uri> = arrayListOf()
-
     fun addPost(text: String, hashtags: String, progressBar: ProgressBar){
 
+        val id = UUID.randomUUID().toString()
+
+        val path = FirebasePathsConstants.POSTS + id
+
         val postMap = hashMapOf<String, Any>(
+            "id" to id,
             "date" to FirebasePathsConstants.postTimeStamp,
             "hashtags" to hashtags,
             "text" to text,
             "authorUid" to  FirebasePathsConstants.CURRENT_USER.toString(),
-            "likes" to 0
+            "likes" to "0"
         )
-        set(FirebasePathsConstants.MY_POST_PATH, FirebasePathsConstants.postTimeStamp, postMap)
-        uploadMultipleImages(uriList, progressBar)
+        set(FirebasePathsConstants.POSTS, id, postMap)
+        uploadMultipleImages(list, path, progressBar)
     }
 
 
-    fun uploadMultipleImages(urisList: ArrayList<Uri>,
-                             progressBar: ProgressBar) {
+    fun uploadMultipleImages(
+        urisList: MutableList<String>,
+        path: String,
+        progressBar: ProgressBar) {
         for (uri in urisList) {
-            addImage(uri,
+            addImage(uri.toUri(),
+                "",
                 FirebasePathsConstants.STORAGE_POSTS_IMAGES,
-                FirebasePathsConstants.MY_FIRESTORE_POSTS_IMAGES,
+                path + "/images",
                 progressBar)
         }
         urisList.clear()
@@ -49,27 +54,10 @@ class FirebasePostsRepo: FirebaseGenericRepo(){
 
     }
 
-//do profili użytkowników
-    fun getUserPostsFromFirestoreToRecyclerView(userPostsListFromFirebase: ArrayList<Post>,
-                                                uid: String,
-                                                adapter: GenericAdapter<Post>
-    ) {
-        getDataToRecyclerView(userPostsListFromFirebase,
-            adapter,
-            FirebasePathsConstants.POSTS + uid)
-    }
 
-
-    fun getDataFromPhotoListToRecyclerView(photoList: MutableList<Uri>,
-                                           adapter: PostImageRecyclerAdapter
+    fun getDataFromPhotoListToRecyclerView(adapter: GenericAdapter<String>
     ){
-        photoList.clear()
-        photoList.addAll(uriList)
+        adapter.dataSet.addAll(list)
         adapter.notifyDataSetChanged()
-    }
-
-
-    fun clearList(){
-        uriList.clear()
     }
 }

@@ -14,7 +14,6 @@ class UsersListViewHolder(view: View,
     : GenericViewHolder<User>(view){
 
     val application = MyPersonalWardrobe.getAppContext()
-
     var recyclerImageView: ImageView
     var recyclerTextView: TextView
 

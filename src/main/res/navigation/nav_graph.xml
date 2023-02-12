@@ -68,8 +68,8 @@
             android:id="@+id/action_HomeFragment_to_UsersListFragment"
             app:destination="@+id/UsersListFragment" />
         <action
-            android:id="@+id/action_HomeFragment_to_ManageContentFragment"
-            app:destination="@+id/ManageContentFragment" />
+            android:id="@+id/action_HomeFragment_to_PreferencesFragment"
+            app:destination="@+id/PreferencesFragment" />
         <action
             android:id="@+id/action_HomeFragment_to_AddPostFragment"
             app:destination="@+id/AddPostFragment" />
@@ -84,9 +84,7 @@
         <action
             android:id="@+id/action_AddPostFragment_to_photoBottomSheet"
             app:destination="@id/photoBottomSheet" />
-        <action
-            android:id="@+id/action_AddPostFragment_to_SinglePhotoFragment"
-            app:destination="@id/SinglePhotoFragment" />
+
     </fragment>
 
     <!-- MY PROFILE -->
@@ -97,37 +95,38 @@
         <action
             android:id="@+id/action_myProfileFragment_to_photoBottomSheet"
             app:destination="@id/photoBottomSheet" />
+
+        <action
+            android:id="@+id/action_MyProfileFragment_to_GalleryFragment"
+            app:destination="@id/GalleryFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/ViewProfileFragment"
         android:name="com.example.mypersonalwardrobe.ui.profile.ViewProfileFragment"
         tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/action_ViewProfileFragment_to_ChatFragment"
+            app:destination="@id/ChatFragment" />
+
+        <action
+            android:id="@+id/action_ViewProfileFragment_to_GalleryFragment"
+            app:destination="@id/GalleryFragment" />
     </fragment>
 
     <!-- ITEMS -->
 
     <fragment
         android:id="@+id/GalleryFragment"
-        android:name="com.example.mypersonalwardrobe.ui.items.GalleryFragment"
+        android:name="com.example.mypersonalwardrobe.ui.gallery.GalleryFragment"
         tools:layout="@layout/fragment_base_recyclerview_with_search">
-        <action
-            android:id="@+id/action_GalleryFragment_to_HomeFragment"
-            app:destination="@id/HomeFragment" />
-        <action
-            android:id="@+id/action_GalleryFragment_to_SinglePhotoFragment"
-            app:destination="@id/SinglePhotoFragment" />
         <action
             android:id="@+id/action_galleryFragment_to_photoBottomSheet"
             app:destination="@id/photoBottomSheet"
             app:popUpTo="@id/GalleryFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/SinglePhotoFragment"
-        android:name="com.example.mypersonalwardrobe.ui.items.SinglePhotoFragment"
-        tools:layout="@layout/fragment_single_photo">
-    </fragment>
 
     <!-- ADD IMAGE -->
 
@@ -158,6 +157,32 @@
         android:id="@+id/AskForOutfitFragment"
         android:name="com.example.mypersonalwardrobe.ui.outfits.AskForOutfitFragment"
         tools:layout="@layout/fragment_base_recyclerview_with_search">
+        <action
+            android:id="@+id/action_AskForOutfitFragment_to_AddOutfitAskFragment"
+            app:destination="@id/AddOutfitAskFragment" />
+
+        <action
+            android:id="@+id/action_AskForOutfitFragment_to_SingleOutfitAskFragment"
+            app:destination="@id/SingleOutfitAskFragment" />
+
+        <!-- single item view -->
+    </fragment>
+
+
+    <dialog
+        android:id="@+id/SingleOutfitAskFragment"
+        android:name="com.example.mypersonalwardrobe.ui.outfits.SingleOutfitAskFragment"
+        tools:layout="@layout/popup_outfit_ask">
+    </dialog>
+
+    <fragment
+        android:id="@+id/AddOutfitAskFragment"
+        android:name="com.example.mypersonalwardrobe.ui.outfits.AddOutfitAskFragment"
+        tools:layout="@layout/fragment_add_post">
+
+        <action
+            android:id="@+id/action_AddOutfitAskFragment_to_GalleryFragment"
+            app:destination="@id/GalleryFragment" />
 
         <!-- single item view -->
     </fragment>
@@ -198,7 +223,8 @@
 
     <fragment
         android:id="@+id/ChatFragment"
-        android:name="com.example.mypersonalwardrobe.ui.chat.ChatFragment">
+        android:name="com.example.mypersonalwardrobe.ui.chat.ChatFragment"
+        tools:layout="@layout/fragment_chat">
     </fragment>
 
 

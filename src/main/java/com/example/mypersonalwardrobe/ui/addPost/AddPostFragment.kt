@@ -1,7 +1,7 @@
 package com.example.mypersonalwardrobe.ui.addPost
 
 
-import android.net.Uri
+import GenericAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +14,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.mypersonalwardrobe.MyPersonalWardrobe
 import com.example.mypersonalwardrobe.R
-import com.example.mypersonalwardrobe.adapters.PostImageRecyclerAdapter
+import com.example.mypersonalwardrobe.adapters.viewholders.ItemToPostOrAskViewHolder
 import com.example.mypersonalwardrobe.databinding.FragmentAddPostBinding
-import com.example.mypersonalwardrobe.viewmodels.SharedHomeAndGalleryViewModel
+import com.example.mypersonalwardrobe.helpers.ItemsListHolder
+import com.example.mypersonalwardrobe.viewmodels.SharedHomeAndNewPhotoViewModel
 import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
 
@@ -24,11 +25,10 @@ class AddPostFragment: Fragment() {
 
     private var _binding: FragmentAddPostBinding? = null
     private val binding get() = _binding!!
-    private lateinit var postViewModel: SharedHomeAndGalleryViewModel
+    private lateinit var postViewModel: SharedHomeAndNewPhotoViewModel
 
 
-    lateinit var adapter: PostImageRecyclerAdapter
-    var photoList: ArrayList<Uri> = arrayListOf()
+    lateinit var adapter: GenericAdapter<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +36,7 @@ class AddPostFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        postViewModel = ViewModelProvider(requireActivity())[SharedHomeAndGalleryViewModel::class.java]
+        postViewModel = ViewModelProvider(requireActivity())[SharedHomeAndNewPhotoViewModel::class.java]
 
         _binding = FragmentAddPostBinding.inflate(inflater, container, false)
 
@@ -46,9 +46,8 @@ class AddPostFragment: Fragment() {
 
         val layoutManager = GridLayoutManager(MyPersonalWardrobe.getAppContext(), 3)
         binding.recyclerView.layoutManager = layoutManager
-        adapter = PostImageRecyclerAdapter(this@AddPostFragment,
-            photoList
-        )
+        adapter = GenericAdapter({ ItemToPostOrAskViewHolder(it) },
+            R.layout.photo_item)
         binding.recyclerView.adapter = adapter
 
         return binding.root
@@ -58,7 +57,7 @@ class AddPostFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        postViewModel.getDataFromPhotoListToRecyclerView(photoList, adapter)
+        postViewModel.getDataFromPhotoListToRecyclerView(adapter)
 
         postViewModel.getProfileImageMutableLiveData().observe(viewLifecycleOwner) { uri ->
             Glide.with(this).load(uri)
@@ -84,7 +83,7 @@ class AddPostFragment: Fragment() {
                 delay(TimeUnit.SECONDS.toMillis(2.5.toLong()))
                 withContext(Dispatchers.Main) {
                     activity?.onBackPressed()
-                    postViewModel.clearList()
+                    ItemsListHolder.ItemsListHolder.list.clear()
                 }
 
 
@@ -93,7 +92,7 @@ class AddPostFragment: Fragment() {
         }
     }
 
-    fun removeItemFromOriginalArrayList(uri: Uri){
+    fun removeItemFromOriginalArrayList(uri: String){
         postViewModel.deleteImage(uri)
     }
 

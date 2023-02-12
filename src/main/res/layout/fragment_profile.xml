@@ -1,8 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.mypersonalwardrobe.viewmodels.MyProfileViewModel" />
+    </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainConstraintLayout"
     android:background="#E8E9EC"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -43,6 +48,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
+
     <ImageView
         android:id="@+id/chat_icon"
         android:layout_width="30dp"
@@ -63,7 +69,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_view_userInfo"
         android:layout_width="0dp"
-        android:layout_height="130dp"
+        android:layout_height="240dp"
         android:background="@drawable/card_view_background"
         android:theme="@style/Theme.MaterialComponents.Light"
         app:layout_constraintEnd_toEndOf="@id/guideline8"
@@ -80,64 +86,115 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.35" />
+                app:layout_constraintGuide_percent="0.27" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:rating="4"
+                android:isIndicator="true"
+                style="?android:attr/ratingBarStyleSmall"
+                android:clickable="false"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/guideline4" />
 
             <TextView
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="username"
+                android:layout_marginBottom="6dp"
+                android:textColor="@color/darkButtonBackground"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/guideline5"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guideline5" />
+                />
+
+            <Button
+                android:id="@+id/items_button"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintWidth_percent="0.2"
+                app:layout_constraintHeight_percent="0.16"
+                android:background="@drawable/search_view_background"
+                android:text="SZAFA"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/darkButtonBackground"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/user_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                 />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hashtags_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@id/guideline4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+
+            <EditText
+                android:id="@+id/edit_hashtags_text_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:backgroundTint="@color/darkButtonBackground"
+                android:inputType="textMultiLine"
+                android:text="@{viewModel.hashtagsMutableLiveData}"
+                android:textColor="@color/darkButtonBackground"
+                android:textColorHint="@color/darkButtonBackground"
+                app:layout_constraintBottom_toTopOf="@id/confirm_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideline4"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintWidth_percent="0.8" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.87" />
+                app:layout_constraintGuide_percent="0.5" />
 
-            <View
-                android:id="@+id/vertical_divider"
-                android:layout_width="1dp"
-                android:layout_height="30dp"
-                android:background="@color/darkButtonBackground"
-                app:layout_constraintBottom_toTopOf="@id/guideline4"
+
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/edit_hashtags_button"
+                android:layout_width="49.98dp"
+                android:layout_height="41.65dp"
+                android:elevation="20dp"
+                android:background="@drawable/search_view_background"
+                android:tint="@color/darkButtonBackground"
+                app:srcCompat="@drawable/ic_baseline_edit_24"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"/>
 
-            <TextView
-                android:id="@+id/nav_option_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="5dp"
-                android:textStyle="bold"
-                app:layout_constraintRight_toRightOf="@id/vertical_divider"
-                app:layout_constraintBottom_toTopOf="@id/guideline4" />
-
-            <TextView
-                android:id="@+id/nav_option_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="5dp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="@id/vertical_divider"
-                app:layout_constraintBottom_toTopOf="@id/guideline4" />
-
-            <ImageView
-                android:id="@+id/edit_userInfo_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_edit_24"
-                android:layout_marginEnd="5dp"
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/confirm_button"
+                android:layout_width="49.98dp"
+                android:layout_height="41.65dp"
+                android:elevation="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/search_view_background"
+                android:tint="@color/darkButtonBackground"
+                app:srcCompat="@drawable/ic_baseline_check_24"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"/>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -164,50 +221,6 @@
         app:layout_constraintBottom_toTopOf="@id/guideline2" />
 
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_view_about"
-        android:layout_width="0dp"
-        android:layout_height="130dp"
-        android:background="@drawable/card_view_background"
-        app:layout_constraintEnd_toEndOf="@id/guideline8"
-        app:layout_constraintStart_toStartOf="@id/guideline7"
-        android:layout_marginTop="10dp"
-        android:theme="@style/Theme.MaterialComponents.Light"
-        app:layout_constraintTop_toBottomOf="@id/card_view_userInfo">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayoutBio"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/about_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:scrollbars = "vertical"
-            android:text="Jun 21, 216lies :-/ t"
-            android:autoLink="web"
-            android:textColorLink="@color/colorLink"
-            android:lineSpacingMultiplier="1.2"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/edit_bio_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_edit_24"
-            android:layout_marginEnd="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
 
     <View
         android:id="@+id/divider"
@@ -215,21 +228,56 @@
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/card_view_about"
+        app:layout_constraintTop_toBottomOf="@id/card_view_userInfo"
         app:layout_constraintRight_toRightOf="@id/guideline8"
         app:layout_constraintLeft_toLeftOf="@id/guideline7"
         />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/posts_recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/bio_textview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="30dp"
+        android:background="@color/colorPrimary"
+        android:text="@{viewModel.bioMutableLiveData}"
+        android:autoLink="web"
+        android:textColorLink ="@color/colorPrimaryDark"
+        android:linksClickable="true"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/divider" />
+
+    <EditText
+        android:id="@+id/edit_bio_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="40dp"
+        android:background="@color/darkButtonBackground"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/darkButtonBackground"
+        android:textColorHint="@color/darkButtonBackground"
+        android:textColorLink ="@color/colorPrimaryDark"
+        android:inputType="textMultiLine"
+        android:gravity="top"
+        android:text="@{viewModel.bioMutableLiveData}"
+        app:layout_constraintTop_toTopOf="@id/posts_recyclerView"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -242,6 +290,7 @@
         android:id="@+id/edit_mode_button"
         android:layout_width="60dp"
         android:layout_height="50dp"
+        android:elevation="20dp"
         android:background="@drawable/search_view_background"
         android:tint="@color/darkButtonBackground"
         app:srcCompat="@drawable/ic_baseline_edit_24"
@@ -253,6 +302,7 @@
         android:id="@+id/exit_from_edit_mode_button"
         android:layout_width="60dp"
         android:layout_height="50dp"
+        android:elevation="20dp"
         android:background="@drawable/search_view_background"
         android:tint="@color/darkButtonBackground"
         app:srcCompat="@drawable/ic_baseline_check_24"
@@ -260,4 +310,16 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/guideline6"/>
 
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_drawer_user_profile"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

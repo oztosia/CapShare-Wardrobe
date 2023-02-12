@@ -4,26 +4,29 @@ import GenericAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mypersonalwardrobe.constants.FirebasePathsConstants
+import com.example.mypersonalwardrobe.firebase.FirebaseGenericRepo
 import com.example.mypersonalwardrobe.firebase.FirebaseUsersListRepo
+import com.example.mypersonalwardrobe.models.Post
 import com.example.mypersonalwardrobe.models.User
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 
 class UsersListViewModel: ViewModel(){
     val usersListRepo: FirebaseUsersListRepo = FirebaseUsersListRepo()
+    val genericRepo: FirebaseGenericRepo = FirebaseGenericRepo()
     var _isUserObservedMutableLiveData = MutableLiveData<Boolean>()
 
 
-    fun getUsersDataFromFirestoreToRecyclerView(usersListFromFirebase: ArrayList<User>,
-                                                adapter: GenericAdapter<User>
+    fun getUsersDataFromFirestoreToRecyclerView(adapter: GenericAdapter<User>
     ) {
-        usersListRepo.getUsersDataFromFirestoreToRecyclerView(usersListFromFirebase, adapter)
+        genericRepo.getDataToRecyclerView(adapter, FirebasePathsConstants.USERS_PATH)
     }
 
-    fun getObservedUsersDataFromFirestoreToRecyclerView(usersListFromFirebase: ArrayList<User>,
-                       adapter: GenericAdapter<User>
-    ){
-        usersListRepo.getObservedUsersDataFromFirestoreToRecyclerView(usersListFromFirebase, adapter)
+
+    fun getObservedUsersDataFromFirestoreToRecyclerView(adapter: GenericAdapter<User>) {
+        genericRepo.getDataToRecyclerViewWithQuery(
+            adapter,
+            FirebasePathsConstants.USERS_PATH, FirebasePathsConstants.OBSERVED)
     }
 
     fun addToObserved(user: User) {
@@ -42,5 +45,21 @@ class UsersListViewModel: ViewModel(){
         }
         return _isUserObservedMutableLiveData
 
+    }
+
+    fun getUserPostsFromFirestoreToRecyclerView(adapter: GenericAdapter<Post>, uid: String
+    ) {
+        genericRepo.getDataToRecyclerViewWithCondition(
+            adapter,
+            "authorUid",
+            uid,
+            FirebasePathsConstants.POSTS)
+    }
+
+
+    fun getHashtagsDataFromFirestoreToRecyclerView(uid: String,
+                                                   adapter: GenericAdapter<String>
+    ) {
+        usersListRepo.getHashtagsDataFromFirestoreToRecyclerView(uid, adapter)
     }
 }

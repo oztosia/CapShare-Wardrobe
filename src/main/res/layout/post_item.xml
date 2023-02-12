@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-
-
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.mypersonalwardrobe.viewmodels.PostsViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_margin="10dp"
@@ -40,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
-            android:text="username"
+            android:text="@{viewModel._userNameMutableLiveData}"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@id/miniProfilePhotoImageView"
             app:layout_constraintBottom_toBottomOf="@id/miniProfilePhotoImageView"
@@ -51,10 +52,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="5dp"
-            android:text="14 hours"
+            android:maxLength="10"
             app:layout_constraintLeft_toRightOf="@id/user_name"
             app:layout_constraintBottom_toBottomOf="@id/miniProfilePhotoImageView"
             tools:ignore="RtlSymmetry" />
+
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/hashtags_recyclerview"
@@ -63,31 +66,72 @@
             android:paddingTop="20dp"
             android:paddingLeft="10dp"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/miniProfilePhotoImageView"
             />
+
+        <me.relex.circleindicator.CircleIndicator2
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:elevation="3dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/images_recyclerView"/>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_post_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hashtags_recyclerview">
 
 
         <TextView
             android:id="@+id/post_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingTop="10dp"
+            android:maxLines="4"
             android:text="Let’s break down the problem: why is this difficult to implement? The first question is where do we truncate the text so that adding expand-action will make the final text fit nicely into the limited line count. The second thing is how to measure the height of the view when it’s collapsed or expanded to form its size change animation. This blog focuses on the first problem."
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/hashtags_recyclerview"
+            app:layout_constraintTop_toTopOf="parent"
             />
+
+        <TextView
+            android:id="@+id/expand_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/more_background"
+            android:paddingHorizontal="10dp"
+            android:text="...więcej"
+            android:textColor="@color/colorLink"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/post_text"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/images_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:background="#27C840"
+            android:background="#E8E9EC"
+            android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/post_text"
+            app:layout_constraintTop_toBottomOf="@id/constraint_post_text"
             />
+
+
 
         <TextView
             android:id="@+id/likes"
@@ -105,7 +149,9 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="5dp"
+            android:layout_marginBottom="7dp"
             android:src="@drawable/ic_outline_favorite_border_24"
+            android:backgroundTint="#E91E63"
             app:layout_constraintEnd_toStartOf="@id/likes"
             app:layout_constraintTop_toBottomOf="@id/images_recyclerView" />
     </androidx.constraintlayout.widget.ConstraintLayout>

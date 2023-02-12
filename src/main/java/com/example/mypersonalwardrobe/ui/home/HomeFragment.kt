@@ -9,24 +9,22 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.mypersonalwardrobe.R
+import com.example.mypersonalwardrobe.constants.FirebasePathsConstants
 import com.example.mypersonalwardrobe.databinding.FragmentHomeBinding
-import com.example.mypersonalwardrobe.viewmodels.SharedHomeAndGalleryViewModel
+import com.example.mypersonalwardrobe.viewmodels.SharedHomeAndNewPhotoViewModel
 
 class HomeFragment : Fragment() {
 
-    private lateinit var sharedViewModel: SharedHomeAndGalleryViewModel
+    private lateinit var sharedViewModel: SharedHomeAndNewPhotoViewModel
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        sharedViewModel = ViewModelProvider(requireActivity())[SharedHomeAndGalleryViewModel::class.java]
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedHomeAndNewPhotoViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
@@ -77,6 +75,7 @@ class HomeFragment : Fragment() {
             binding.openNavigationIcon.visibility = View.GONE
             binding.closeNavigationIcon.visibility = View.VISIBLE
         }
+
         binding.closeNavigationIcon.setOnClickListener {
             binding.navigationDrawerCustomer.visibility = View.GONE
             binding.openNavigationIcon.visibility = View.VISIBLE
@@ -89,8 +88,10 @@ class HomeFragment : Fragment() {
 
             when (it.itemId) {
                 R.id.nav_items -> {
+                    val bundle = Bundle()
+                    bundle.putString("userName", FirebasePathsConstants.CURRENT_USER)
                     sharedViewModel.uploadGalleryTypeMutableLiveData("items")
-                    findNavController().navigate(R.id.action_HomeFragment_to_GalleryFragment)
+                    findNavController().navigate(R.id.action_HomeFragment_to_GalleryFragment, bundle)
                 }
                 R.id.nav_outfits -> {
                     sharedViewModel.uploadGalleryTypeMutableLiveData("outfits")
@@ -101,10 +102,12 @@ class HomeFragment : Fragment() {
                     findNavController().navigate(R.id.action_HomeFragment_to_AskForOutfitFragment)
                 }
                 R.id.nav_contacts -> {
-                    findNavController().navigate(R.id.action_HomeFragment_to_UsersListFragment)
+                    val bundle = Bundle()
+                    bundle.putString("home", "home")
+                    findNavController().navigate(R.id.action_HomeFragment_to_UsersListFragment, bundle)
                 }
                 R.id.nav_preferences -> {
-                    findNavController().navigate(R.id.action_HomeFragment_to_ManageContentFragment)
+                    findNavController().navigate(R.id.action_HomeFragment_to_PreferencesFragment)
                 }
             }
             return@setNavigationItemSelectedListener true

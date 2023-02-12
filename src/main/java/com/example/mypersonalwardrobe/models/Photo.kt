@@ -4,9 +4,12 @@ import org.parceler.Parcel
 import org.parceler.ParcelConstructor
 
 @Parcel(Parcel.Serialization.BEAN)
-class Photo @ParcelConstructor constructor(
-    var uri: String ,
+class Photo(
+    var downloadURL: String,
     var hashtags: String,
-    var docId: String
+    var docId: String,
 ){
+    @ParcelConstructor constructor(): this("", "",
+        "")
+
 }

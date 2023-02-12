@@ -1,6 +1,7 @@
 package com.example.mypersonalwardrobe.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -8,6 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.mypersonalwardrobe.R
 import com.example.mypersonalwardrobe.databinding.ActivityHomeBinding
+import org.opencv.android.OpenCVLoader
 
 class HomeActivity : AppCompatActivity() {
 
@@ -25,6 +27,11 @@ class HomeActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_home)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        if (!OpenCVLoader.initDebug())
+            Log.e("OpenCV", "Unable to load OpenCV!")
+        else
+            Log.d("OpenCV", "OpenCV loaded Successfully!")
     }
 
     override fun onSupportNavigateUp(): Boolean {

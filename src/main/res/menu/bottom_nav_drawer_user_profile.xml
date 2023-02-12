@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+        android:id="@+id/nav_bio"
+        android:title="O MNIE"
+        android:icon="@drawable/ic_outline_favorite_border_24" />
+    <item
+        android:id="@+id/nav_posts"
+        android:title="POSTY"
+        android:icon="@drawable/ic_outline_favorite_border_24"
+   />
+</menu>

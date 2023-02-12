@@ -6,7 +6,7 @@ import kotlin.collections.ArrayList
 data class Outfit (
     var date: Date,
     var authorUid: String,
-    var imagesList: ArrayList<String>,
-    var description: String
+    var imageUri: String,
+    var description: String,
 ){
 }
