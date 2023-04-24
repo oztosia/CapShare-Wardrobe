@@ -8,13 +8,13 @@ import org.parceler.ParcelConstructor
 data class Post(
     var id: String,
     var date: String,
+    var hashtags: String,
     var authorUid: String,
-   // var hashtags: String,
     var text: String,
-    //var imagesList: ArrayList<Photo>,
-    //var likes: String
+    var username: String,
+    var profileImage: String
 ){
     @ParcelConstructor constructor(): this("", "", "",
-        "")
+        "", "", "", "")
 
 }

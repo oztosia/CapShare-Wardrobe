@@ -35,7 +35,7 @@ class UsersListFragment: Fragment(), SearchView.OnQueryTextListener{
         usersListViewModel = ViewModelProvider(requireActivity()).get(UsersListViewModel::class.java)
         _binding = FragmentBaseRecyclerviewWithSearchBinding.inflate(inflater, container, false)
 
-        val layoutManager = GridLayoutManager(MyPersonalWardrobe.getAppContext(), 3)
+        val layoutManager = GridLayoutManager(MyPersonalWardrobe.getAppContext(), 4)
         binding.recyclerView.layoutManager = layoutManager
         adapter = GenericAdapter({ UsersListViewHolder(it, this@UsersListFragment) }, R.layout.user_item)
         binding.recyclerView.adapter = adapter

@@ -18,9 +18,7 @@ class GenericAdapter<T>(private val viewHolderFactory: (view: View) -> GenericVi
     var dataSet: ArrayList<T> = arrayListOf()
     var sortedArray: ArrayList<T> = arrayListOf()
 
-    init {
-        sortedArray = dataSet
-    }
+    init { sortedArray = dataSet }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenericViewHolder<T> {
         val v = LayoutInflater.from(parent.context).inflate(layout, parent, false)
@@ -35,6 +33,8 @@ class GenericAdapter<T>(private val viewHolderFactory: (view: View) -> GenericVi
 
 
     override fun getItemCount(): Int = sortedArray.size
+
+
 
 
     override fun getFilter(): Filter {

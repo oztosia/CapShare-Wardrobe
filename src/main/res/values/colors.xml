@@ -10,10 +10,17 @@
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#073BDF</color>
     <color name="colorAccent">#000000</color>
+    <color name="colorAppBackground">#F3E3B3</color>
+    <color name="colorAppAccent">#3E7278</color>
+    <color name="colorWrongItem">#7E0E0E</color>
+    <color name="colorCorrectItem">#2C830D</color>
+    <color name="colorAuthCard">#EFEDED</color>
     <color name="colorLink">#073BDF</color>
     <color name="lightButtonText">#B27E978D</color>
     <color name="lightButtonBackground">#A1A2A6</color>
     <color name="darkButtonText">#0B0D12</color>
     <color name="darkButtonBackground">#636674</color>
+
+
 
 </resources>

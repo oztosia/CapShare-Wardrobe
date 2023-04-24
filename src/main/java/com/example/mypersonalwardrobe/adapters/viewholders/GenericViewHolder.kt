@@ -8,6 +8,4 @@ abstract class GenericViewHolder<T>(val view: View)
     : RecyclerView.ViewHolder(view) {
 
     abstract fun bind(item: T)
-
-
 }

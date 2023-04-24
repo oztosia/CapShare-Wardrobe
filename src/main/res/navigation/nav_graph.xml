@@ -3,41 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/SignInFragment">
+    app:startDestination="@id/AuthFragment">
 
-    <!-- authentication fragments ui -->
+    <!-- SPLASH -->
+
+    <!-- AUTH -->
 
     <fragment
-        android:id="@+id/SignInFragment"
-        android:name="com.example.mypersonalwardrobe.ui.auth.SignInFragment"
-        tools:layout="@layout/fragment_sign_in">
+        android:id="@+id/AuthFragment"
+        android:name="com.example.mypersonalwardrobe.ui.auth.AuthFragment"
+        tools:layout="@layout/fragment_auth">
 
         <action
-            android:id="@+id/action_SignInFragment_to_HomeFragment"
+            android:id="@+id/action_AuthFragment_to_HomeFragment"
             app:destination="@+id/HomeFragment" />
 
         <action
-            android:id="@+id/action_SignInFragment_to_SignUpFragment"
-            app:destination="@+id/SignUpFragment" />
+            android:id="@+id/action_AuthFragment_to_SignUpDialogFragment"
+            app:destination="@+id/SignUpDialogFragment" />
+
+        <action
+            android:id="@+id/action_AuthFragment_to_AuthWithEmailDialogFragment"
+            app:destination="@+id/AuthWithEmailDialogFragment" />
 
     </fragment>
 
-    <fragment
-        android:id="@+id/SignUpFragment"
-        android:name="com.example.mypersonalwardrobe.ui.auth.SignUpFragment"
-        tools:layout="@layout/fragment_sign_up">
+    <dialog
+        android:id="@+id/AuthWithEmailDialogFragment"
+        android:name="com.example.mypersonalwardrobe.ui.auth.AuthWithEmailDialogFragment"
+        tools:layout="@layout/dialog_auth_with_email">
 
         <action
-            android:id="@+id/action_SignUpFragment_to_HomeFragment"
+            android:id="@+id/action_AuthWithEmailDialogFragment_to_HomeFragment"
             app:destination="@+id/HomeFragment" />
-        <action
-            android:id="@+id/action_SignUpFragment_to_SignInFragment"
-            app:destination="@+id/SignInFragment" />
 
+    </dialog>
 
-    </fragment>
-
-    <!-- home ui -->
 
     <fragment
         android:id="@+id/HomeFragment"
@@ -47,11 +48,15 @@
 
 
         <action
-            android:id="@+id/action_HomeFragment_to_MyProfileFragment"
-            app:destination="@+id/MyProfileFragment" />
+            android:id="@+id/action_HomeFragment_to_ProfileFragment"
+            app:destination="@+id/ProfileFragment" />
         <action
-            android:id="@+id/action_HomeFragment_to_SignInFragment"
-            app:destination="@+id/SignInFragment" />
+            android:id="@+id/action_HomeFragment_to_AuthFragment"
+            app:destination="@+id/AuthFragment" />
+
+        <action
+            android:id="@+id/action_HomeFragment_to_SingleImageFragment"
+            app:destination="@+id/SingleImageFragment" />
 
 
 
@@ -87,23 +92,11 @@
 
     </fragment>
 
-    <!-- MY PROFILE -->
-    <fragment
-        android:id="@+id/MyProfileFragment"
-        android:name="com.example.mypersonalwardrobe.ui.profile.MyProfileFragment"
-        tools:layout="@layout/fragment_profile">
-        <action
-            android:id="@+id/action_myProfileFragment_to_photoBottomSheet"
-            app:destination="@id/photoBottomSheet" />
-
-        <action
-            android:id="@+id/action_MyProfileFragment_to_GalleryFragment"
-            app:destination="@id/GalleryFragment" />
-    </fragment>
+    <!-- PROFILE -->
 
     <fragment
-        android:id="@+id/ViewProfileFragment"
-        android:name="com.example.mypersonalwardrobe.ui.profile.ViewProfileFragment"
+        android:id="@+id/ProfileFragment"
+        android:name="com.example.mypersonalwardrobe.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile">
 
         <action
@@ -113,7 +106,27 @@
         <action
             android:id="@+id/action_ViewProfileFragment_to_GalleryFragment"
             app:destination="@id/GalleryFragment" />
+
+        <action
+            android:id="@+id/action_ViewProfileFragment_to_SingleImageFragment"
+            app:destination="@+id/SingleImageFragment" />
+
+        <action
+            android:id="@+id/action_ProfileFragment_to_EditProfileDialogFragment"
+            app:destination="@+id/EditProfileDialogFragment" />
+
     </fragment>
+
+
+    <dialog
+        android:id="@+id/EditProfileDialogFragment"
+        android:name="com.example.mypersonalwardrobe.ui.profile.EditProfileDialogFragment"
+        tools:layout="@layout/dialog_edit_profile">
+
+        <action
+            android:id="@+id/action_editProfileFragment_to_photoBottomSheet"
+            app:destination="@+id/photoBottomSheet" />
+    </dialog>
 
     <!-- ITEMS -->
 
@@ -125,6 +138,10 @@
             android:id="@+id/action_galleryFragment_to_photoBottomSheet"
             app:destination="@id/photoBottomSheet"
             app:popUpTo="@id/GalleryFragment" />
+
+        <action
+            android:id="@+id/action_GalleryFragment_to_SingleImageFragment"
+            app:destination="@+id/SingleImageFragment" />
     </fragment>
 
 
@@ -136,14 +153,14 @@
 
         <action
             android:id="@+id/action_photoBottomSheet_to_newPhotoFragment"
-            app:destination="@id/NewPhotoFragment" />
+            app:destination="@id/NewImageFragment" />
 
     </dialog>
 
     <fragment
-        android:id="@+id/NewPhotoFragment"
-        android:name="com.example.mypersonalwardrobe.ui.addImage.NewPhotoFragment"
-        tools:layout="@layout/fragment_new_photo">
+        android:id="@+id/NewImageFragment"
+        android:name="com.example.mypersonalwardrobe.ui.addImage.NewImageFragment"
+        tools:layout="@layout/fragment_new_image">
     </fragment>
 
     <!-- OUTFITS -->
@@ -153,9 +170,11 @@
         tools:layout="@layout/fragment_outfits">
     </fragment>
     <!-- ASK FOR OUTFIT -->
+
+
     <fragment
         android:id="@+id/AskForOutfitFragment"
-        android:name="com.example.mypersonalwardrobe.ui.outfits.AskForOutfitFragment"
+        android:name="com.example.mypersonalwardrobe.ui.outfitAsks.AskForOutfitFragment"
         tools:layout="@layout/fragment_base_recyclerview_with_search">
         <action
             android:id="@+id/action_AskForOutfitFragment_to_AddOutfitAskFragment"
@@ -165,19 +184,24 @@
             android:id="@+id/action_AskForOutfitFragment_to_SingleOutfitAskFragment"
             app:destination="@id/SingleOutfitAskFragment" />
 
-        <!-- single item view -->
+        <action
+            android:id="@+id/action_AskForOutfitFragment_to_SingleImageFragment"
+            app:destination="@+id/SingleImageFragment" />
     </fragment>
 
 
-    <dialog
+    <fragment
         android:id="@+id/SingleOutfitAskFragment"
-        android:name="com.example.mypersonalwardrobe.ui.outfits.SingleOutfitAskFragment"
-        tools:layout="@layout/popup_outfit_ask">
-    </dialog>
+        android:name="com.example.mypersonalwardrobe.ui.outfitAsks.SingleOutfitAskFragment"
+        tools:layout="@layout/fragment_outfit_ask">
+        <action
+            android:id="@+id/action_SingleOutfitAskFragment_to_SingleImageFragment"
+            app:destination="@+id/SingleImageFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/AddOutfitAskFragment"
-        android:name="com.example.mypersonalwardrobe.ui.outfits.AddOutfitAskFragment"
+        android:name="com.example.mypersonalwardrobe.ui.outfitAsks.AddOutfitAskFragment"
         tools:layout="@layout/fragment_add_post">
 
         <action
@@ -196,12 +220,9 @@
 
         <action
             android:id="@+id/action_UsersListFragment_to_ViewProfileFragment"
-            app:destination="@id/ViewProfileFragment" />
+            app:destination="@id/ProfileFragment" />
 
     </fragment>
-
-
-    <!-- PREFERENCES -->
 
     <fragment
         android:id="@+id/PreferencesFragment"
@@ -209,22 +230,22 @@
         tools:layout="@layout/fragment_preferences">
     </fragment>
 
-
-
-
-
-
-
-
-
-
-
-
+    <dialog
+        android:id="@+id/SingleImageFragment"
+        android:name="com.example.mypersonalwardrobe.ui.singleImage.SingleImageFragment"
+        tools:layout="@layout/popup_photo">
+    </dialog>
 
     <fragment
         android:id="@+id/ChatFragment"
         android:name="com.example.mypersonalwardrobe.ui.chat.ChatFragment"
         tools:layout="@layout/fragment_chat">
+        <action
+            android:id="@+id/action_ChatFragment_to_photoBottomSheet"
+            app:destination="@id/photoBottomSheet" />
+        <action
+            android:id="@+id/action_ChatFragment_to_SingleImageFragment"
+            app:destination="@+id/SingleImageFragment" />
     </fragment>
 
 

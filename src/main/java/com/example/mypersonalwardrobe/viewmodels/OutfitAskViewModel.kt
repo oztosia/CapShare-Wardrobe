@@ -10,27 +10,24 @@ import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
-import com.example.mypersonalwardrobe.MyPersonalWardrobe
-import com.example.mypersonalwardrobe.constants.FirebasePathsConstants
-import com.example.mypersonalwardrobe.firebase.FirebaseGenericRepo
-import com.example.mypersonalwardrobe.firebase.FirebaseOutfitAsksRepo
-import com.example.mypersonalwardrobe.firebase.FirebaseUserRepo
-import com.example.mypersonalwardrobe.helpers.ItemsListHolder
-import com.example.mypersonalwardrobe.helpers.ItemsListHolder.ItemsListHolder.getItems
-import com.example.mypersonalwardrobe.helpers.ItemsListHolder.ItemsListHolder.removeItem
+import com.example.mypersonalwardrobe.constants.FirebaseConst
+import com.example.mypersonalwardrobe.source.FirebaseGenericRepo
+import com.example.mypersonalwardrobe.domain.FirebaseOutfitAsksRepo
+import com.example.mypersonalwardrobe.domain.FirebaseUserRepo
+import com.example.mypersonalwardrobe.utils.ItemsListHolder
+import com.example.mypersonalwardrobe.utils.ItemsListHolder.ItemsListHolder.getItems
+import com.example.mypersonalwardrobe.utils.ItemsListHolder.ItemsListHolder.removeItem
 import com.example.mypersonalwardrobe.models.OutfitAsk
-import com.example.mypersonalwardrobe.models.PostImage
+import com.example.mypersonalwardrobe.models.Photo
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 
 class OutfitAskViewModel: ViewModel(){
 
     val firebaseRepo: FirebaseGenericRepo = FirebaseGenericRepo()
     val outfitAskRepo: FirebaseOutfitAsksRepo = FirebaseOutfitAsksRepo()
-
-
-
-
+    var  _lastDocumentSnapshotMutableLiveData = MutableLiveData<DocumentSnapshot>()
     private val userRepo: FirebaseUserRepo = FirebaseUserRepo()
     private var  _profileImageMutableLiveData = MutableLiveData<Uri>()
 
@@ -43,15 +40,16 @@ class OutfitAskViewModel: ViewModel(){
 
     fun getOutfitAsksFromFirestoreToRecyclerView(adapter: GenericAdapter<OutfitAsk>
     ) {
-        firebaseRepo.getDataToRecyclerView(adapter, FirebasePathsConstants.OUTFIT_ASKS)
+
+        outfitAskRepo.getOutfitsAsksToRecyclerView(adapter)
     }
 
 
-    fun getOutfitAskImagesFromFirestoreToRecyclerView(adapter: GenericAdapter<PostImage>,
+    fun getOutfitAskImagesFromFirestoreToRecyclerView(adapter: GenericAdapter<Photo>,
                                                       id: String
     ) {
         firebaseRepo.getDataToRecyclerView(adapter,
-            FirebasePathsConstants.OUTFIT_ASKS +
+            FirebaseConst.OUTFIT_ASKS +
                     "$id/images")
     }
 
@@ -79,7 +77,7 @@ class OutfitAskViewModel: ViewModel(){
 
     fun getHashtagsDataFromFirestoreToRecyclerView(adapter: GenericAdapter<String>,
                                                    outfitAskId: String) {
-        firebaseRepo.getFromDocumentAndSplit(FirebasePathsConstants.OUTFIT_ASKS,
+        firebaseRepo.getFromDocumentAndSplit(FirebaseConst.OUTFIT_ASKS,
             outfitAskId,
             "hashtags",
             adapter)
@@ -104,6 +102,5 @@ class OutfitAskViewModel: ViewModel(){
             userNameTextView.text = documentSnapshot.getString("userName")
         }
     }
-
 
 }

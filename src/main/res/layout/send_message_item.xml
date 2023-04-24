@@ -3,22 +3,73 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/send_message_layout"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <TextView
+            android:id="@+id/send_message_text"
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:padding="15dp"
             android:background="@drawable/send_message_background"
-            android:text="When parsing the item_message_send.xml file, you will notice that a message variable of type Message has been declared in it and the content of the text property has been assigned to the application’s unique TextView"
+            android:text="ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
             android:textColor="@android:color/white"
+            app:layout_constraintWidth_percent="0.45"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.45" />
+            />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/sendMessageImageView"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            app:layout_constraintDimensionRatio="W,4:6"
+            app:layout_constraintStart_toStartOf="@id/send_message_text"
+            app:layout_constraintEnd_toEndOf="@id/send_message_text"
+            app:layout_constraintTop_toBottomOf="@id/send_message_text"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize5Percent"
+            />
+
+
+
+
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/receive_message_text"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:padding="15dp"
+            android:background="@drawable/receive_message_background"
+            android:text="ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+            android:textColor="@android:color/white"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/receiveMessageImageView"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            app:layout_constraintDimensionRatio="W,4:6"
+            app:layout_constraintStart_toStartOf="@id/receive_message_text"
+            app:layout_constraintEnd_toEndOf="@id/receive_message_text"
+            app:layout_constraintTop_toBottomOf="@id/receive_message_text"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize5Percent"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,11 +1,18 @@
 package com.example.mypersonalwardrobe.models
 
-import java.util.*
+import org.parceler.Parcel
+import org.parceler.ParcelConstructor
+
+@Parcel(Parcel.Serialization.BEAN)
 
 data class Message(
-    var date: Date,
+    var date: String,
     var authorUid: String,
     var text: String,
-    var imageUri: String,
-) {
+    var downloadUrl: String,
+){
+    @ParcelConstructor
+    constructor(): this("", "",
+        "", "")
+
 }

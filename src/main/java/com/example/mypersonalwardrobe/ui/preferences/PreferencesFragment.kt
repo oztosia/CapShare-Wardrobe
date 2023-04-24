@@ -2,6 +2,8 @@ package com.example.mypersonalwardrobe.ui.preferences
 
 import GenericAdapter
 import android.os.Bundle
+import android.text.Editable
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +13,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.mypersonalwardrobe.MyPersonalWardrobe
 import com.example.mypersonalwardrobe.R
 import com.example.mypersonalwardrobe.adapters.viewholders.HashtagListViewHolder
-import com.example.mypersonalwardrobe.constants.FirebasePathsConstants
+import com.example.mypersonalwardrobe.constants.FirebaseConst
 import com.example.mypersonalwardrobe.databinding.FragmentPreferencesBinding
-import com.example.mypersonalwardrobe.viewmodels.OutfitAskViewModel
 import com.example.mypersonalwardrobe.viewmodels.PreferencesViewModel
 import com.google.android.flexbox.*
+
 
 class PreferencesFragment : Fragment() {
 
@@ -45,11 +47,11 @@ class PreferencesFragment : Fragment() {
 
         binding.observedHashtagsRecyclerView.layoutManager = hashtagsLayoutManager
         observedHashtagsAdapter = GenericAdapter({ HashtagListViewHolder(it) },
-            R.layout.hashtag_item)
+            R.layout.item_hashtag)
         binding.observedHashtagsRecyclerView.adapter = observedHashtagsAdapter
         preferencesViewModel
             .getHashtagsDataFromFirestoreToRecyclerView(observedHashtagsAdapter,
-                FirebasePathsConstants.OBSERVED_HASHTAGS,
+                FirebaseConst.OBSERVED_HASHTAGS,
                 "observed"
                 )
 
@@ -61,18 +63,24 @@ class PreferencesFragment : Fragment() {
 
         binding.blockedHashtagsRecyclerView.layoutManager = blockedHashtagsLayoutManager
         blockedHashtagsAdapter = GenericAdapter({ HashtagListViewHolder(it) },
-            R.layout.hashtag_item)
+            R.layout.item_hashtag)
         binding.blockedHashtagsRecyclerView.adapter = blockedHashtagsAdapter
 
         preferencesViewModel
             .getHashtagsDataFromFirestoreToRecyclerView(blockedHashtagsAdapter,
-                FirebasePathsConstants.BLOCKED_HASHTAGS,
+                FirebaseConst.BLOCKED_HASHTAGS,
                 "blocked"
             )
 
+        preferencesViewModel.getObservedHashtagsMutableLiveData().observe(viewLifecycleOwner) { observed ->
+            val editable: Editable = SpannableStringBuilder(observed)
+            binding.observedHashtagsEditText.text = editable
+        }
 
-
-
+        preferencesViewModel.getBlockedHashtagsMutableLiveData().observe(viewLifecycleOwner) { blocked ->
+            val editable: Editable = SpannableStringBuilder(blocked)
+            binding.blockedHashtagsEditText.text = editable
+        }
 
         //binding.lifecycleOwner = this
         binding.viewModel = preferencesViewModel
@@ -97,23 +105,13 @@ class PreferencesFragment : Fragment() {
 
 
             val observedHashtags = binding.observedHashtagsEditText.text
-
             val blockedHashtags = binding.blockedHashtagsEditText.text
 
             preferencesViewModel.updateObservedHashtags(observedHashtags)
             preferencesViewModel.updateBlockedHashtags(blockedHashtags)
 
-            preferencesViewModel
-                .getHashtagsDataFromFirestoreToRecyclerView(observedHashtagsAdapter,
-                    FirebasePathsConstants.OBSERVED_HASHTAGS,
-                    "observed"
-                )
-
-            preferencesViewModel
-                .getHashtagsDataFromFirestoreToRecyclerView(blockedHashtagsAdapter,
-                    FirebasePathsConstants.BLOCKED_HASHTAGS,
-                    "blocked"
-                )
+            preferencesViewModel.getHashtagsDataFromFirestoreToRecyclerView(observedHashtagsAdapter, FirebaseConst.OBSERVED_HASHTAGS, "observed")
+            preferencesViewModel.getHashtagsDataFromFirestoreToRecyclerView(blockedHashtagsAdapter, FirebaseConst.BLOCKED_HASHTAGS, "blocked")
 
 
             binding.blockedHashtagsRecyclerView.visibility = View.VISIBLE
@@ -129,6 +127,4 @@ class PreferencesFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

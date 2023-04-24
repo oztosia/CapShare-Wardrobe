@@ -3,12 +3,12 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.mypersonalwardrobe.viewmodels.MyProfileViewModel" />
+            type="com.example.mypersonalwardrobe.viewmodels.ProfileViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/mainConstraintLayout"
-    android:background="#E8E9EC"
+    android:background="@color/colorAppBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -66,6 +66,17 @@
         app:layout_constraintEnd_toStartOf="@id/chat_icon"
         app:layout_constraintBottom_toTopOf="@id/guideline3" />
 
+    <ImageView
+        android:id="@+id/remove_from_observed_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_baseline_person_remove_24"
+        app:layout_constraintEnd_toStartOf="@id/chat_icon"
+        app:layout_constraintBottom_toTopOf="@id/guideline3"
+        android:visibility="gone"/>
+
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_view_userInfo"
         android:layout_width="0dp"
@@ -86,48 +97,48 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.27" />
+                app:layout_constraintGuide_percent="0.2" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
+                style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:rating="4"
-                android:isIndicator="true"
-                style="?android:attr/ratingBarStyleSmall"
                 android:clickable="false"
+                android:isIndicator="true"
+                android:rating="4"
+                app:layout_constraintBottom_toTopOf="@id/guideline4"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/guideline4" />
+                app:layout_constraintRight_toRightOf="parent" />
 
             <TextView
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="username"
                 android:layout_marginBottom="6dp"
+                android:text="username"
                 android:textColor="@color/darkButtonBackground"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/guideline5"
+                app:layout_constraintTop_toTopOf="@id/guideline5"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                />
+                app:layout_constraintRight_toRightOf="parent" />
+
 
             <Button
                 android:id="@+id/items_button"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintWidth_percent="0.2"
-                app:layout_constraintHeight_percent="0.16"
+                android:layout_marginTop="6dp"
                 android:background="@drawable/search_view_background"
                 android:text="SZAFA"
-                android:layout_marginTop="6dp"
                 android:textColor="@color/darkButtonBackground"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/user_name"
+                app:layout_constraintHeight_percent="0.16"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                 />
+                app:layout_constraintTop_toTopOf="@id/user_name"
+                app:layout_constraintBottom_toTopOf="@id/ratingBar"
+                app:layout_constraintWidth_percent="0.2" />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -135,67 +146,21 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@color/colorPrimary"
-                app:layout_constraintTop_toBottomOf="@id/guideline4"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp" />
-
-
-            <EditText
-                android:id="@+id/edit_hashtags_text_view"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:backgroundTint="@color/darkButtonBackground"
-                android:inputType="textMultiLine"
-                android:text="@{viewModel.hashtagsMutableLiveData}"
-                android:textColor="@color/darkButtonBackground"
-                android:textColorHint="@color/darkButtonBackground"
-                app:layout_constraintBottom_toTopOf="@id/confirm_button"
+                android:paddingBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guideline4"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintWidth_percent="0.8" />
+                app:layout_constraintTop_toBottomOf="@id/guideline4" />
+
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.5" />
-
-
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/edit_hashtags_button"
-                android:layout_width="49.98dp"
-                android:layout_height="41.65dp"
-                android:elevation="20dp"
-                android:background="@drawable/search_view_background"
-                android:tint="@color/darkButtonBackground"
-                app:srcCompat="@drawable/ic_baseline_edit_24"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/confirm_button"
-                android:layout_width="49.98dp"
-                android:layout_height="41.65dp"
-                android:elevation="20dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/search_view_background"
-                android:tint="@color/darkButtonBackground"
-                app:srcCompat="@drawable/ic_baseline_check_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-
-
+                app:layout_constraintGuide_percent="0.6" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -210,16 +175,6 @@
         app:layout_constraintBottom_toTopOf="@id/guideline2"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
         />
-
-    <ImageView
-        android:id="@+id/add_photo_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_photo_camera_24"
-        android:elevation="2dp"
-        app:layout_constraintEnd_toEndOf="@id/profilePhotoImageView"
-        app:layout_constraintBottom_toTopOf="@id/guideline2" />
-
 
 
     <View
@@ -252,7 +207,6 @@
         android:layout_height="0dp"
         android:padding="30dp"
         android:background="@color/colorPrimary"
-        android:text="@{viewModel.bioMutableLiveData}"
         android:autoLink="web"
         android:textColorLink ="@color/colorPrimaryDark"
         android:linksClickable="true"
@@ -261,23 +215,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider" />
 
-    <EditText
-        android:id="@+id/edit_bio_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:padding="40dp"
-        android:background="@color/darkButtonBackground"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="@color/darkButtonBackground"
-        android:textColorHint="@color/darkButtonBackground"
-        android:textColorLink ="@color/colorPrimaryDark"
-        android:inputType="textMultiLine"
-        android:gravity="top"
-        android:text="@{viewModel.bioMutableLiveData}"
-        app:layout_constraintTop_toTopOf="@id/posts_recyclerView"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -294,18 +231,7 @@
         android:background="@drawable/search_view_background"
         android:tint="@color/darkButtonBackground"
         app:srcCompat="@drawable/ic_baseline_edit_24"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline6"/>
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/exit_from_edit_mode_button"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:elevation="20dp"
-        android:background="@drawable/search_view_background"
-        android:tint="@color/darkButtonBackground"
-        app:srcCompat="@drawable/ic_baseline_check_24"
+        android:visibility="gone"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/guideline6"/>

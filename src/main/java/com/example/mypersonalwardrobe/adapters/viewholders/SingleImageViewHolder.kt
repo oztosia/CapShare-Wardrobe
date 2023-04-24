@@ -3,15 +3,13 @@ package com.example.mypersonalwardrobe.adapters.viewholders
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.example.mypersonalwardrobe.MyPersonalWardrobe
 import com.example.mypersonalwardrobe.R
-import com.example.mypersonalwardrobe.constants.FirebasePathsConstants
+import com.example.mypersonalwardrobe.constants.FirebaseConst
 import com.example.mypersonalwardrobe.models.Photo
 import com.example.mypersonalwardrobe.ui.gallery.GalleryFragment
-import com.example.mypersonalwardrobe.viewmodels.GalleryViewModel
 import com.google.android.material.navigation.NavigationView
 
 class SingleImageViewHolder  (val fragment: GalleryFragment,view: View)
@@ -29,7 +27,7 @@ class SingleImageViewHolder  (val fragment: GalleryFragment,view: View)
     override fun bind(item: Photo) {
 
 
-        if (fragment.arguments?.getString("userName") != FirebasePathsConstants.CURRENT_USER){
+        if (fragment.arguments?.getString("userName") != FirebaseConst.CURRENT_USER){
             options.visibility = View.GONE
         }
 

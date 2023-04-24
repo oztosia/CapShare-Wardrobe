@@ -18,7 +18,7 @@ import com.example.mypersonalwardrobe.MyPersonalWardrobe
 import com.example.mypersonalwardrobe.R
 import com.example.mypersonalwardrobe.adapters.viewholders.ItemsListViewHolder
 import com.example.mypersonalwardrobe.adapters.viewholders.SingleImageViewHolder
-import com.example.mypersonalwardrobe.constants.FirebasePathsConstants
+import com.example.mypersonalwardrobe.constants.FirebaseConst
 import com.example.mypersonalwardrobe.databinding.FragmentBaseRecyclerviewWithSearchBinding
 import com.example.mypersonalwardrobe.models.Photo
 import com.example.mypersonalwardrobe.viewmodels.GalleryViewModel
@@ -32,10 +32,6 @@ class GalleryFragment : Fragment(), SearchView.OnQueryTextListener{
     lateinit var singleImageAdapter: GenericAdapter<Photo>
     private lateinit var galleryViewModel: GalleryViewModel
     var dialog: AlertDialog? = null
-
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +51,7 @@ class GalleryFragment : Fragment(), SearchView.OnQueryTextListener{
         val actionBundle = arguments?.getString("action")
         galleryViewModel.getDataFromFirestoreToRecyclerView("items", bundle.toString(),
             itemsAdapter)
-        if (bundle != FirebasePathsConstants.CURRENT_USER){
+        if (bundle != FirebaseConst.CURRENT_USER){
             binding.addItemButton.visibility = View.GONE
         }
 
@@ -76,7 +72,9 @@ class GalleryFragment : Fragment(), SearchView.OnQueryTextListener{
         binding.search.setOnQueryTextListener(this)
 
         binding.addItemButton.setOnClickListener {
-            findNavController().navigate(R.id.action_galleryFragment_to_photoBottomSheet)
+            val bundle = Bundle()
+            bundle.putString("intent", "gallery")
+            findNavController().navigate(R.id.action_galleryFragment_to_photoBottomSheet, bundle)
             itemsAdapter.dataSet.clear()
         }
 

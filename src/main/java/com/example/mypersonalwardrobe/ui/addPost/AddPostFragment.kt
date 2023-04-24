@@ -16,7 +16,7 @@ import com.example.mypersonalwardrobe.MyPersonalWardrobe
 import com.example.mypersonalwardrobe.R
 import com.example.mypersonalwardrobe.adapters.viewholders.ItemToPostOrAskViewHolder
 import com.example.mypersonalwardrobe.databinding.FragmentAddPostBinding
-import com.example.mypersonalwardrobe.helpers.ItemsListHolder
+import com.example.mypersonalwardrobe.utils.ItemsListHolder
 import com.example.mypersonalwardrobe.viewmodels.SharedHomeAndNewPhotoViewModel
 import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
@@ -67,7 +67,9 @@ class AddPostFragment: Fragment() {
         }
 
         binding.addImageIcon.setOnClickListener {
-            findNavController().navigate(R.id.action_AddPostFragment_to_photoBottomSheet)
+            val bundle = Bundle()
+            bundle.putString("intent", "post")
+            findNavController().navigate(R.id.action_AddPostFragment_to_photoBottomSheet, bundle)
         }
 
 

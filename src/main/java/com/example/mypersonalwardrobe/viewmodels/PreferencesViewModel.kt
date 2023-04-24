@@ -1,72 +1,47 @@
 package com.example.mypersonalwardrobe.viewmodels
 
 import GenericAdapter
-import android.content.ContentValues
 import android.text.Editable
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mypersonalwardrobe.constants.FirebasePathsConstants
-import com.example.mypersonalwardrobe.firebase.FirebaseGenericRepo
+import com.example.mypersonalwardrobe.constants.FirebaseConst
+import com.example.mypersonalwardrobe.source.FirebaseGenericRepo
+import com.example.mypersonalwardrobe.utils.ObservedPostsSetHolder.ObservedPostsSetHolder.postSet
 
 class PreferencesViewModel : ViewModel(){
 
-    val firebaseRepo: FirebaseGenericRepo = FirebaseGenericRepo()
+    private val firebaseRepo: FirebaseGenericRepo = FirebaseGenericRepo()
     private val  observedHashtagsMutableLiveData = MutableLiveData<String>()
     private val  blockedHashtagsMutableLiveData = MutableLiveData<String>()
 
     fun getObservedHashtagsMutableLiveData(): MutableLiveData<String> {
-        firebaseRepo.get(FirebasePathsConstants.HASHTAGS_PREFERENCES,
-            FirebasePathsConstants.OBSERVED_HASHTAGS,
-        "observed",
-        observedHashtagsMutableLiveData)
-        Log.d(ContentValues.TAG, "hashtagsmld: " + observedHashtagsMutableLiveData.value.toString())
+        firebaseRepo.get(FirebaseConst.HASHTAGS_PREFERENCES, FirebaseConst.OBSERVED_HASHTAGS, "observed", observedHashtagsMutableLiveData)
         return observedHashtagsMutableLiveData
     }
 
     fun getBlockedHashtagsMutableLiveData(): MutableLiveData<String> {
-        firebaseRepo.get(FirebasePathsConstants.HASHTAGS_PREFERENCES,
-            FirebasePathsConstants.BLOCKED_HASHTAGS,
-            "blocked",
-            blockedHashtagsMutableLiveData)
-        Log.d(ContentValues.TAG, "hashtagsmld: " + blockedHashtagsMutableLiveData.value.toString())
+        firebaseRepo.get(FirebaseConst.HASHTAGS_PREFERENCES, FirebaseConst.BLOCKED_HASHTAGS, "blocked", blockedHashtagsMutableLiveData)
         return blockedHashtagsMutableLiveData
     }
 
-
-
     fun updateObservedHashtags(hashtags: Editable){
         observedHashtagsMutableLiveData.value = hashtags.toString()
-
-        val postMap = hashMapOf<String, String>(
-            "observed" to observedHashtagsMutableLiveData.value.toString(),
-        )
-
-        firebaseRepo.update(FirebasePathsConstants.HASHTAGS_PREFERENCES,
-            FirebasePathsConstants.OBSERVED_HASHTAGS,
-            postMap)
-
+        val postMap = hashMapOf("observed" to observedHashtagsMutableLiveData.value.toString(),)
+        firebaseRepo.set(FirebaseConst.HASHTAGS_PREFERENCES, FirebaseConst.OBSERVED_HASHTAGS, postMap)
+        postSet.clear()
     }
 
-        fun updateBlockedHashtags(hashtags: Editable){
+    fun updateBlockedHashtags(hashtags: Editable){
         blockedHashtagsMutableLiveData.value = hashtags.toString()
-
-            val postMap = hashMapOf<String, String>(
-                "blocked" to blockedHashtagsMutableLiveData.value.toString(),
-            )
-
-            firebaseRepo.update(FirebasePathsConstants.HASHTAGS_PREFERENCES,
-                FirebasePathsConstants.BLOCKED_HASHTAGS,
-                postMap)
+        val postMap = hashMapOf("blocked" to blockedHashtagsMutableLiveData.value.toString())
+        firebaseRepo.set(FirebaseConst.HASHTAGS_PREFERENCES, FirebaseConst.BLOCKED_HASHTAGS, postMap)
     }
-
-
 
     fun getHashtagsDataFromFirestoreToRecyclerView(adapter: GenericAdapter<String>,
                                                    documentPath: String,
                                                    hashtagsType: String
     ) {
-        firebaseRepo.getFromDocumentAndSplit(FirebasePathsConstants.HASHTAGS_PREFERENCES,
+        firebaseRepo.getFromDocumentAndSplit(FirebaseConst.HASHTAGS_PREFERENCES,
             documentPath,
             hashtagsType,
             adapter)

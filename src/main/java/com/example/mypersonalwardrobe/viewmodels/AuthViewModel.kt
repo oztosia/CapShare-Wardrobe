@@ -1,56 +1,24 @@
 package com.example.mypersonalwardrobe.viewmodels
 
-import android.content.ContentValues
-import android.util.Log
 import androidx.lifecycle.*
-import com.example.mypersonalwardrobe.firebase.FirebaseAuthRepo
+import com.example.mypersonalwardrobe.domain.FirebaseAuthRepo
+import com.facebook.AccessToken
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
-
 
 class AuthViewModel : ViewModel() {
 
-
     private val firebaseAuthRepo: FirebaseAuthRepo = FirebaseAuthRepo()
-    private var userMutableLiveData: MutableLiveData<FirebaseUser> = firebaseAuthRepo.getUserMutableLiveData()
-    val isUsernameUniqueMutableLiveData = MutableLiveData<Boolean>()
+    var _userMutableLiveData: MutableLiveData<FirebaseUser?> = firebaseAuthRepo.getUserMutableLiveData()
 
-    fun login(email: String, password: String) {
-        firebaseAuthRepo.login(email, password)
-    }
+    suspend fun signInWithEmailAndPassword(email: String, password: String) {
+       firebaseAuthRepo.signInWithEmailAndPassword(email, password) }
 
-   fun register(email: String, password: String, userName: String){
-       firebaseAuthRepo.register(email, password, userName)
-    }
+    suspend fun signInWithGoogle(googleAccount: GoogleSignInAccount) { firebaseAuthRepo.signInWithGoogle(googleAccount) }
 
-    fun checkIfUserNameIsUnique(userName: String){
+    suspend fun signInWithFacebook(token: AccessToken) { firebaseAuthRepo.signInWithFacebook(token) }
 
-        val query = FirebaseFirestore
-            .getInstance()
-            .collection("users")
-            .whereEqualTo("userName", userName)
+    suspend fun signUpWithEmailAndPassword(email: String, password: String){ firebaseAuthRepo.signUpWithEmailAndPassword(email, password) }
 
-        query.get().addOnSuccessListener { documents ->
-            if (!documents.isEmpty) {
-                isUsernameUniqueMutableLiveData.postValue(false)
-                Log.w(ContentValues.TAG, "Found: " + documents.toString())
-            }
-            else{
-                isUsernameUniqueMutableLiveData.postValue(true)
-                Log.w(ContentValues.TAG, "Found: 0" )
-            }
-        }
-            .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-            }
-    }
-
-    fun getIsUsernameUniqueMutableLiveData(): MutableLiveData<Boolean> {
-        Log.w(ContentValues.TAG, "is unique get: " + isUsernameUniqueMutableLiveData.value.toString())
-        return isUsernameUniqueMutableLiveData
-    }
-
-    fun getUserMutableLiveData(): LiveData<FirebaseUser> {
-        return userMutableLiveData
-    }
+    fun signOut(){ firebaseAuthRepo.signOut() }
 }

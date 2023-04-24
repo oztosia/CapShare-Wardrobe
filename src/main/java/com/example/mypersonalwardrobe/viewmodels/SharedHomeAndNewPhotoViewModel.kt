@@ -7,61 +7,27 @@ import android.util.Log
 import android.widget.ProgressBar
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mypersonalwardrobe.firebase.FirebaseGenericRepo
-import com.example.mypersonalwardrobe.firebase.FirebasePostsRepo
-import com.example.mypersonalwardrobe.firebase.FirebaseUserRepo
-import com.example.mypersonalwardrobe.helpers.ItemsListHolder.ItemsListHolder.list
+import com.example.mypersonalwardrobe.constants.FirebaseConst
+import com.example.mypersonalwardrobe.source.FirebaseGenericRepo
+import com.example.mypersonalwardrobe.domain.FirebasePostsRepo
+import com.example.mypersonalwardrobe.domain.FirebaseUserRepo
+import com.example.mypersonalwardrobe.utils.ItemsListHolder.ItemsListHolder.list
+import com.example.mypersonalwardrobe.models.Post
+import com.example.mypersonalwardrobe.models.User
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 class SharedHomeAndNewPhotoViewModel: ViewModel() {
 
     private val userRepo: FirebaseUserRepo = FirebaseUserRepo()
-    private val genericRepo: FirebaseGenericRepo = FirebaseGenericRepo()
     private val postsRepo: FirebasePostsRepo = FirebasePostsRepo()
-
-    var _galleryTypeMutableLiveData = MutableLiveData<String>()
     private var  _profileImageMutableLiveData = MutableLiveData<Uri>()
+    val  _currentUserMutableLiveData = MutableLiveData<User>()
+    var  _lastDocumentSnapshotMutableLiveData = MutableLiveData<DocumentSnapshot>()
 
-
-    fun uploadGalleryTypeMutableLiveData(galleryTypePath: String): MutableLiveData<String> {
-        _galleryTypeMutableLiveData.value = galleryTypePath
-        Log.d("TAG", "current gallery: " + _galleryTypeMutableLiveData.value.toString() )
-        return _galleryTypeMutableLiveData
-    }
-
-    ////
-
-    fun addHashtags(path: String, data: Map<String, Any>){
-        genericRepo.add(path, data)
-    }
-    ////
-
-    fun addImage(uri: Uri,
-                 hashtags: String,
-                 storagePath: String,
-                 firestorePath: String,
-                 progressBar: ProgressBar) {
-        genericRepo.addImage(uri,
-            hashtags,
-            storagePath,
-            firestorePath,
-            progressBar)
-    }
-
-
-
-    fun replaceImage(uri: Uri,
-                     imageName: String,
-                     storagePath: String,
-                     firestorePath: String,
-                     documentPath: String,
-                     progressBar: ProgressBar){
-        genericRepo.replaceImage(uri,
-            imageName,
-            storagePath,
-            firestorePath,
-            documentPath,
-            progressBar)
-    }
+//////
 
     fun getProfileImageMutableLiveData(): MutableLiveData<Uri> {
         userRepo.getProfileImageMutableLiveData(_profileImageMutableLiveData)
@@ -69,27 +35,38 @@ class SharedHomeAndNewPhotoViewModel: ViewModel() {
         return _profileImageMutableLiveData
     }
 
-    fun signOut(){
-        userRepo.signOut()
-        Log.e("TAG", "Signed out" )
+    fun getCurrentUser(): MutableLiveData<User> {
+
+        val documentReference: DocumentReference = FirebaseFirestore.getInstance().collection(FirebaseConst.USERS_PATH)
+            .document(FirebaseConst.CURRENT_USER)
+
+        documentReference.get()
+            .addOnSuccessListener { documentSnapshot ->
+                _currentUserMutableLiveData
+                    .postValue(documentSnapshot.toObject<User>()!!)
+                Log.d(TAG, "docSnapshot: " + documentSnapshot)
+            }
+            .addOnFailureListener {
+                Log.d(TAG, "docSnapshot: " + it)
+            }
+        return _currentUserMutableLiveData
     }
 
-    //////////post vm
+ ////addpost vm
 
-    fun addImageUriToPhotoList(uri:String){
-        list.add(uri)
-    }
+    fun addPost(text: String, hashtags: String, progressBar: ProgressBar){ postsRepo.addPost(text, hashtags, progressBar) }
 
-    fun getDataFromPhotoListToRecyclerView(adapter: GenericAdapter<String>){
-        postsRepo.getDataFromPhotoListToRecyclerView(adapter)
-    }
+    suspend fun createListOfPostsToDisplay(){ postsRepo.createListOfPostsToDisplay() }
 
-    fun deleteImage(uri: String){
-        list.remove(uri)
-    }
+    suspend fun getMorePostsFromFirestoreToRecyclerView(adapter: GenericAdapter<Post>) { postsRepo.loadData(adapter, _lastDocumentSnapshotMutableLiveData) }
 
-    fun addPost(text: String, hashtags: String, progressBar: ProgressBar){
-        postsRepo.addPost(text, hashtags, progressBar)
+    fun getDataFromPhotoListToRecyclerView(adapter: GenericAdapter<String>){ postsRepo.getDataFromPhotoListToRecyclerView(adapter) }
+
+    fun deleteImage(uri: String){ list.remove(uri) }
+
+    suspend fun getUserPostsFromFirestoreToRecyclerView(adapter: GenericAdapter<Post>
+    ) {
+        createListOfPostsToDisplay()
+        postsRepo.loadData(adapter, _lastDocumentSnapshotMutableLiveData)
     }
-    /////////////////post vm
 }

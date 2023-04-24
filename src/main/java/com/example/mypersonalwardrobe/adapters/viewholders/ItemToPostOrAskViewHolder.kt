@@ -2,11 +2,9 @@ package com.example.mypersonalwardrobe.adapters.viewholders
 
 import android.view.View
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.mypersonalwardrobe.MyPersonalWardrobe
 import com.example.mypersonalwardrobe.R
-import com.example.mypersonalwardrobe.ui.outfits.AddOutfitAskFragment
 
 class ItemToPostOrAskViewHolder(view: View)
 : GenericViewHolder<String>(view) {
@@ -30,14 +28,10 @@ class ItemToPostOrAskViewHolder(view: View)
         emptyCheckIcon.visibility = View.GONE
         checkIcon.visibility = View.GONE
 
-
-        Glide.with(application).load(item)
-            .centerCrop()
-            .placeholder(R.drawable.ic_launcher_foreground)
-            .into(recyclerImageView)
+        Glide.with(application).load(item).centerCrop().placeholder(R.drawable.ic_launcher_foreground).into(recyclerImageView)
 
         deleteIcon.setOnClickListener {
-            //fragment.removeItem(item)
+            //fragment.removeItem(item) TODO jeden fragment outfitasks i posts
         }
 
     }

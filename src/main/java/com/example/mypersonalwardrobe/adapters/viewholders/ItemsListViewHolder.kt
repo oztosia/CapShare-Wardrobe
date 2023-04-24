@@ -2,14 +2,10 @@ package com.example.mypersonalwardrobe.adapters.viewholders
 
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.mypersonalwardrobe.MyPersonalWardrobe
 import com.example.mypersonalwardrobe.R
-import com.example.mypersonalwardrobe.constants.FirebasePathsConstants
-import com.example.mypersonalwardrobe.helpers.ItemsListHolder
-import com.example.mypersonalwardrobe.helpers.ItemsListHolder.ItemsListHolder.addItem
+import com.example.mypersonalwardrobe.utils.ItemsListHolder.ItemsListHolder.addItem
 import com.example.mypersonalwardrobe.models.Photo
 import com.example.mypersonalwardrobe.ui.gallery.GalleryFragment
 import com.example.mypersonalwardrobe.viewmodels.OutfitAskViewModel
@@ -45,8 +41,6 @@ class ItemsListViewHolder (val fragment: GalleryFragment, view: View)
 
         emptyCheckIcon.setOnClickListener {
             addItem(item.downloadURL)
-            Toast.makeText(
-               application, "data in uri" + item.downloadURL, Toast.LENGTH_SHORT).show()
             checkIcon.visibility = View.VISIBLE
             emptyCheckIcon.visibility = View.GONE
         }
@@ -57,8 +51,8 @@ class ItemsListViewHolder (val fragment: GalleryFragment, view: View)
             checkIcon.visibility = View.GONE
         }
 
-        Glide.with(application).load(item.downloadURL)
-            .centerCrop()
+        Glide.with(application)
+            .load(item.downloadURL)
             .placeholder(R.drawable.ic_launcher_foreground)
             .into(recyclerImageView)
 

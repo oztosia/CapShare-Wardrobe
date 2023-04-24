@@ -9,8 +9,7 @@ data class User(
     var userName: String,
     var hashtags: String,
     var profileImage: String,
-    var uid: String,
-){
+    var uid: String){
     @ParcelConstructor constructor(): this("", "",
         "","")
 

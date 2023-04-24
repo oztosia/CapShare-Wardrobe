@@ -1,8 +1,6 @@
 package com.example.mypersonalwardrobe.adapters.viewholders
 
 import GenericAdapter
-import android.content.ContentValues.TAG
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,108 +9,85 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mypersonalwardrobe.MyPersonalWardrobe
 import com.example.mypersonalwardrobe.R
+import com.example.mypersonalwardrobe.constants.FirebaseConst
+import com.example.mypersonalwardrobe.utils.DateFormatter
+import com.example.mypersonalwardrobe.models.Photo
 import com.example.mypersonalwardrobe.models.Post
-import com.example.mypersonalwardrobe.models.PostImage
 import com.example.mypersonalwardrobe.viewmodels.PostsViewModel
 import com.google.android.flexbox.*
+import com.google.android.material.navigation.NavigationView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import me.relex.circleindicator.CircleIndicator2
-
-
 
 class PostViewHolder(view: View)
     : GenericViewHolder<Post>(view) {
 
-    val application = MyPersonalWardrobe.getAppContext()
+    val application = MyPersonalWardrobe.getAppContext()!!
 
-    lateinit var imagesAdapter: GenericAdapter<PostImage>
+    lateinit var imagesAdapter: GenericAdapter<Photo>
     lateinit var hashtagsAdapter: GenericAdapter<String>
 
-    val postViewModel: PostsViewModel = PostsViewModel()
+    private val postViewModel: PostsViewModel = PostsViewModel()
 
-
-    lateinit var profileImageView: ImageView
-    lateinit var userNameTextView: TextView
+        lateinit var profileImageView: ImageView
+        lateinit var userNameTextView: TextView
         var dateTextView: TextView = view.findViewById(R.id.date)
+        var moreIcon: ImageView = view.findViewById(R.id.more_icon)
+        var postMenuDrawer: NavigationView = view.findViewById(R.id.post_menu_drawer)
         var hashtagsRecyclerAdapter: RecyclerView = view.findViewById(R.id.hashtags_recyclerview)
         var postTextView: TextView = view.findViewById(R.id.post_text)
         var postImageRecyclerAdapter: RecyclerView = view.findViewById(R.id.images_recyclerView)
         var expandTextView: TextView = view.findViewById(R.id.expand_text)
-        var loveIcon: ImageView = view.findViewById(R.id.love_icon)
+        var likeIcon: ImageView = view.findViewById(R.id.like_icon)
+        var unlikeIcon: ImageView = view.findViewById(R.id.unlike_icon)
         var likesTextView: TextView = view.findViewById(R.id.likes)
-
-
-
 
     override fun bind(item: Post){
 
-        postTextView.text = item.text
-
-
-        if (postTextView.text.length < 100){
-            expandTextView.visibility = View.GONE
-        }
-
-        profileImageView = view.findViewById(R.id.miniProfilePhotoImageView)
-        postViewModel.getProfileImage(item.authorUid, profileImageView)
-
-
-
+      profileImageView = view.findViewById(R.id.miniProfilePhotoImageView)
+        postViewModel.getProfileImage(item.authorUid, profileImageView, application)
 
         userNameTextView =  view.findViewById(R.id.user_name)
         postViewModel.getUserName(item.authorUid, userNameTextView)
 
-
+        dateTextView.text = DateFormatter.convertFromMillisToDate(item.date.toLong())
 
         val hashtagsLayoutManager = FlexboxLayoutManager(hashtagsRecyclerAdapter.context)
         hashtagsLayoutManager.flexDirection = FlexDirection.ROW
         hashtagsLayoutManager.flexWrap = FlexWrap.WRAP
         hashtagsLayoutManager.justifyContent = JustifyContent.CENTER
         hashtagsLayoutManager.alignItems = AlignItems.STRETCH
-
-
-
-
-
-
         hashtagsRecyclerAdapter.layoutManager = hashtagsLayoutManager
-        hashtagsAdapter = GenericAdapter({ HashtagListViewHolder(it) },
-            R.layout.hashtag_item)
+        hashtagsAdapter = GenericAdapter({ HashtagListViewHolder(it) }, R.layout.item_hashtag)
         hashtagsRecyclerAdapter.adapter = hashtagsAdapter
-        postViewModel
-            .getHashtagsDataFromFirestoreToRecyclerView(hashtagsAdapter,
-                item.id)
+        postViewModel.getHashtagsDataFromFirestoreToRecyclerView(hashtagsAdapter, item.id)
 
+        if (item.authorUid == FirebaseConst.CURRENT_USER) moreIcon.visibility = View.VISIBLE
 
+        moreIcon.setOnClickListener { postMenuDrawer.visibility = View.VISIBLE }
 
-        dateTextView.text = item.date
+        postMenuDrawer.setNavigationItemSelectedListener {
+            when (it.itemId) { R.id.nav_delete -> { CoroutineScope(Dispatchers.IO).launch { postViewModel.delete(item.id) } } }
+            return@setNavigationItemSelectedListener true
+        }
 
+        postTextView.text = item.text
 
-
-
+        if (postTextView.text.length < 100){ expandTextView.visibility = View.GONE }
 
         expandTextView.setOnClickListener {
             postTextView.maxLines = 100
             expandTextView.visibility = View.GONE
         }
 
-
-        val pagerSnapHelper = PagerSnapHelper()
         imagesAdapter = GenericAdapter({ PostImageViewHolder(it) }, R.layout.post_image)
-
-
-        postViewModel
-            .testPostsImagesFromFirestoreToRecyclerView(
-                imagesAdapter,
-                item.authorUid,
-                item.id)
-
+        postViewModel.getPostsImagesFromFirestoreToRecyclerView(imagesAdapter, item.id)
         val imagesLayoutManager = LinearLayoutManager(application, LinearLayoutManager.HORIZONTAL, false)
         postImageRecyclerAdapter.layoutManager = imagesLayoutManager
         postImageRecyclerAdapter.adapter = imagesAdapter
-
-
-
-
+        val pagerSnapHelper = PagerSnapHelper()
         val emptyObserver = object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 val itemCount = imagesAdapter.itemCount
@@ -120,24 +95,17 @@ class PostViewHolder(view: View)
                 indicator.attachToRecyclerView(postImageRecyclerAdapter, pagerSnapHelper)
                 indicator.createIndicators(itemCount,0)
                 indicator.animatePageSelected(2)
-
-                Log.d(TAG, "indicator " + itemCount)
             }
         }
         imagesAdapter.registerAdapterDataObserver(emptyObserver)
         emptyObserver.onChanged()
 
+        postViewModel.checkIfPostIsLiked(item.id, likeIcon, unlikeIcon)
 
+        postViewModel.getLikesFromFirestore(item.id, likesTextView)
 
-        //likesTextView.text = item.likes.toString()
+        likeIcon.setOnClickListener { postViewModel.like(item.id, likesTextView, likeIcon, unlikeIcon) }
 
-        loveIcon.setOnClickListener {
-
-        }
-
-
-
+        unlikeIcon.setOnClickListener { postViewModel.unlike(item.id, likesTextView, likeIcon, unlikeIcon) }
     }
-
-
 }
