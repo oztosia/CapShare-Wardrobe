@@ -3,11 +3,11 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.mypersonalwardrobe.viewmodels.PreferencesViewModel" />
+            type="com.oztosia.capsharewardrobe.viewmodels.PreferencesViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:background="@color/colorAppBackground"
+    android:background="@color/colorAppAccent"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -24,7 +24,8 @@
         android:layout_height="30dp"
         android:src="@drawable/ic_baseline_live_help_24"
         app:layout_constraintStart_toStartOf="@id/card_view"
-        app:layout_constraintTop_toBottomOf="@id/guideline4"/>
+        app:layout_constraintTop_toBottomOf="@id/guideline4"
+        app:tint="@color/colorPrimary" />
 
 
 
@@ -157,10 +158,10 @@
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/edit_mode_button"
                 android:layout_width="60dp"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:elevation="20dp"
-                android:background="@drawable/search_view_background"
-                android:tint="@color/darkButtonBackground"
+                android:background="@drawable/background_app_accent"
+                android:tint="@color/colorPrimary"
                 app:srcCompat="@drawable/ic_baseline_edit_24"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -169,11 +170,11 @@
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/confirm_button"
                 android:layout_width="60dp"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:elevation="20dp"
                 android:visibility="gone"
-                android:background="@drawable/search_view_background"
-                android:tint="@color/darkButtonBackground"
+                android:background="@drawable/background_app_accent"
+                android:tint="@color/colorPrimary"
                 app:srcCompat="@drawable/ic_baseline_check_24"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"

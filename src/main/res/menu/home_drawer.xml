@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/customer_drawer_menu">
+        <item
+            android:id="@+id/nav_items"
+            android:icon="@drawable/ic_baseline_image_24"
+            android:title="ubrania" />
+        <item
+            android:id="@+id/nav_outfits"
+            android:icon="@drawable/ic_baseline_image_24"
+            android:title="outfity" />
+        <item
+            android:id="@+id/nav_planner"
+            android:icon="@drawable/ic_baseline_calendar_month_24"
+            android:title="mój planer" />
+        <item
+            android:id="@+id/nav_contacts"
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="kontakty" />
+        <item
+            android:id="@+id/nav_preferences"
+            android:icon="@drawable/ic_baseline_app_settings_alt_24"
+            android:title="preferencje" />
+    </group>
+</menu>

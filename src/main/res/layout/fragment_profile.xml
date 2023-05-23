@@ -3,14 +3,25 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.mypersonalwardrobe.viewmodels.ProfileViewModel" />
+            type="com.oztosia.capsharewardrobe.viewmodels.ProfileViewModel" />
     </data>
+
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/mainConstraintLayout"
-    android:background="@color/colorAppBackground"
+    android:background="@color/colorAppAccent"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/colorAppAccent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
@@ -32,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10" />
+        app:layout_constraintGuide_percent="0.09" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
@@ -53,6 +64,7 @@
         android:id="@+id/chat_icon"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        app:tint="@color/colorPrimary"
         android:src="@drawable/ic_baseline_chat_24"
         app:layout_constraintEnd_toEndOf="@id/guideline8"
         app:layout_constraintBottom_toTopOf="@id/guideline3" />
@@ -62,6 +74,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="20dp"
+        app:tint="@color/colorPrimary"
         android:src="@drawable/ic_baseline_person_add_24"
         app:layout_constraintEnd_toStartOf="@id/chat_icon"
         app:layout_constraintBottom_toTopOf="@id/guideline3" />
@@ -71,6 +84,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="20dp"
+        app:tint="@color/colorPrimary"
         android:src="@drawable/ic_baseline_person_remove_24"
         app:layout_constraintEnd_toStartOf="@id/chat_icon"
         app:layout_constraintBottom_toTopOf="@id/guideline3"
@@ -99,68 +113,78 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.2" />
 
-            <RatingBar
-                android:id="@+id/ratingBar"
-                style="?android:attr/ratingBarStyleSmall"
+
+            <TextView
+                android:id="@+id/likes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="false"
-                android:isIndicator="true"
-                android:rating="4"
-                app:layout_constraintBottom_toTopOf="@id/guideline4"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                android:layout_marginStart="20dp"
+                android:text="14"
+                app:layout_constraintTop_toBottomOf="@id/user_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/items_button" />
+
+            <ImageView
+                android:id="@+id/like_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_outline_favorite_border_24"
+                app:layout_constraintTop_toBottomOf="@id/user_name"
+                app:layout_constraintEnd_toStartOf="@id/likes"
+                app:layout_constraintBottom_toTopOf="@id/items_button" />
+
 
             <TextView
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
                 android:text="username"
                 android:textColor="@color/darkButtonBackground"
                 android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="@id/guideline5"
+                app:layout_constraintBottom_toTopOf="@id/likes"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideline5" />
 
 
             <Button
                 android:id="@+id/items_button"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="6dp"
-                android:background="@drawable/search_view_background"
+                android:background="@drawable/background_app_accent"
                 android:text="SZAFA"
-                android:textColor="@color/darkButtonBackground"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/guideline4"
                 app:layout_constraintHeight_percent="0.16"
+                app:layout_constraintWidth_percent="0.2"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/user_name"
-                app:layout_constraintBottom_toTopOf="@id/ratingBar"
-                app:layout_constraintWidth_percent="0.2" />
+                />
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/hashtags_recyclerView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@color/colorPrimary"
                 android:layout_marginTop="10dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:background="@color/colorPrimary"
+                android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guideline4" />
-
+                app:layout_constraintTop_toBottomOf="@id/guideline4"
+                app:layout_constraintVertical_bias="1.0" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.6" />
+                app:layout_constraintGuide_percent="0.65" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -169,36 +193,27 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:elevation="2dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@{viewModel._profileImageMutableLiveData, default=@drawable/icon}"
+        app:layout_constraintBottom_toTopOf="@id/guideline2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-        />
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
 
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/card_view_userInfo"
-        app:layout_constraintRight_toRightOf="@id/guideline8"
-        app:layout_constraintLeft_toLeftOf="@id/guideline7"
-        />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/posts_recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        android:padding="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/profile_card_background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintTop_toBottomOf="@id/card_view_userInfo"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -206,41 +221,37 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="30dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/profile_card_background"
         android:autoLink="web"
         android:textColorLink ="@color/colorPrimaryDark"
         android:linksClickable="true"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider" />
+        app:layout_constraintTop_toBottomOf="@id/card_view_userInfo" />
 
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.93" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/edit_mode_button"
         android:layout_width="60dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:elevation="20dp"
-        android:background="@drawable/search_view_background"
-        android:tint="@color/darkButtonBackground"
+        android:background="@drawable/background_app_accent"
+        android:tint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_baseline_edit_24"
         android:visibility="gone"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline6"/>
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"/>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

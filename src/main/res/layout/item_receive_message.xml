@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/receive_message_layout"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.99"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/receive_message_text"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:padding="15dp"
+            android:background="@drawable/receive_message_background"
+            android:text="tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+            android:textColor="@android:color/white"
+            app:layout_constraintWidth_max="wrap"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="14.04"
+            android:textColor="#C3C4C8"
+            android:layout_marginStart="7dp"
+            android:layout_marginBottom="7dp"
+            app:layout_constraintStart_toEndOf="@id/receive_message_text"
+            app:layout_constraintBottom_toBottomOf="@id/receive_message_text" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/receiveMessageImageView"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            app:layout_constraintDimensionRatio="W,4:6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/receive_message_text"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize5Percent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

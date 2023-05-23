@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_bio"
-        android:title="MOJE"
+        android:id="@+id/nav_all"
+        android:title="WSZYSTKIE"
         android:icon="@drawable/ic_outline_favorite_border_24" />
     <item
-        android:id="@+id/nav_posts"
-        android:title="ODE MNIE"
+        android:id="@+id/nav_my"
+        android:title="MOJE"
         android:icon="@drawable/ic_outline_favorite_border_24"
         />
 </menu>

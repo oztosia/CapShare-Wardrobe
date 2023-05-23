@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.mypersonalwardrobe" >
+    package="com.oztosia.capsharewardrobe" >
 
     <uses-feature android:name="android.hardware.camera.any" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
 
     <application
-        android:name=".MyPersonalWardrobe"
+        android:name="com.oztosia.capsharewardrobe.CapShareWardrobe"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -20,7 +22,7 @@
         android:theme="@style/AppTheme.NoActionBar">
 
         <activity
-            android:name="com.example.mypersonalwardrobe.ui.home.HomeActivity"
+            android:name="com.oztosia.capsharewardrobe.ui.home.HomeActivity"
             android:exported="true"
             android:windowSoftInputMode="stateVisible|adjustPan"
             android:screenOrientation="portrait" >
@@ -33,7 +35,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.mypersonalwardrobe.ui.gallery.fileprovider"
+            android:authorities="com.oztosia.capsharewardrobe.ui.gallery.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

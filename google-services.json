@@ -7,157 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:673271030911:android:fc3d8888c7d14924c38b4a",
+        "mobilesdk_app_id": "1:673271030911:android:4ea699daf3ad24e9c38b4a",
         "android_client_info": {
-          "package_name": "com.appx.youtube"
+          "package_name": "com.oztosia.capsharewardrobe"
         }
       },
       "oauth_client": [
         {
-          "client_id": "673271030911-24e4ak3ptlh5blkupkhigq6smafupp4s.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC2HpFQXEN8eq_FMFGCgwc4Z_huCaVEdec"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "673271030911-24e4ak3ptlh5blkupkhigq6smafupp4s.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:673271030911:android:3c3f18fa856c532fc38b4a",
-        "android_client_info": {
-          "package_name": "com.arpit.codemonsterstask"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "673271030911-24e4ak3ptlh5blkupkhigq6smafupp4s.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC2HpFQXEN8eq_FMFGCgwc4Z_huCaVEdec"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "673271030911-24e4ak3ptlh5blkupkhigq6smafupp4s.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:673271030911:android:7e58bae6e0b89536c38b4a",
-        "android_client_info": {
-          "package_name": "com.bugrakandemir.instaclonefb"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "673271030911-24e4ak3ptlh5blkupkhigq6smafupp4s.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC2HpFQXEN8eq_FMFGCgwc4Z_huCaVEdec"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "673271030911-24e4ak3ptlh5blkupkhigq6smafupp4s.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:673271030911:android:3e2461ab0e5869c9c38b4a",
-        "android_client_info": {
-          "package_name": "com.example.collage"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "673271030911-24e4ak3ptlh5blkupkhigq6smafupp4s.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC2HpFQXEN8eq_FMFGCgwc4Z_huCaVEdec"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "673271030911-24e4ak3ptlh5blkupkhigq6smafupp4s.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:673271030911:android:216636dff953e603c38b4a",
-        "android_client_info": {
-          "package_name": "com.example.mypersonalwardrobe"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "673271030911-24e4ak3ptlh5blkupkhigq6smafupp4s.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC2HpFQXEN8eq_FMFGCgwc4Z_huCaVEdec"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "673271030911-24e4ak3ptlh5blkupkhigq6smafupp4s.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:673271030911:android:5d6e216a089cdf0ec38b4a",
-        "android_client_info": {
-          "package_name": "com.ftw.firebaseupload"
-        }
-      },
-      "oauth_client": [
+          "client_id": "673271030911-ekep2rt4nn3ovgjm34ej87gfueu23cov.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oztosia.capsharewardrobe",
+            "certificate_hash": "26629b016207633f6ed882e787fd063d7f623d7c"
+          }
+        },
         {
           "client_id": "673271030911-24e4ak3ptlh5blkupkhigq6smafupp4s.apps.googleusercontent.com",
           "client_type": 3

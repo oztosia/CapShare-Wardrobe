@@ -3,16 +3,15 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.mypersonalwardrobe.viewmodels.OutfitAskViewModel" />
+            type="com.oztosia.capsharewardrobe.viewmodels.OutfitAskViewModel" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/post_background"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_constraint"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,26 +19,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.94" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/post_menu_drawer"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.1" />
+            android:visibility="gone"
+            android:elevation="3dp"
+            app:layout_constraintTop_toTopOf="@id/more_icon"
+            app:layout_constraintEnd_toEndOf="@id/more_icon"
+            app:menu="@menu/singe_item_menu_drawer"/>
+
+
 
 
         <ImageView
             android:id="@+id/more_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="40dp"
+            android:visibility="gone"
             android:src="@drawable/ic_baseline_more_vert_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -49,11 +47,11 @@
             android:id="@+id/images_recyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/card_view_background"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/more_icon"
             />
 
         <me.relex.circleindicator.CircleIndicator2
@@ -72,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:text="title"
             android:textSize="20sp"
             android:maxLength="150"
@@ -95,8 +93,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
-                android:paddingHorizontal="10dp"
                 android:maxLines="4"
+                android:paddingHorizontal="10dp"
                 android:text="Let’s break down the problem: why is this difficult to implement? The first question is where do we truncate the text so that adding expand-action will make the final text fit nicely into the limited line count. The second thing is how to measure the height of the view when it’s collapsed or expanded to form its size change animation. This blog focuses on the first problem."
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -125,6 +123,7 @@
             android:paddingLeft="10dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraint_post_text"
             app:layout_constraintBottom_toTopOf="@id/miniProfilePhotoImageView"
             />
 
@@ -142,8 +141,8 @@
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@id/add_outfit_button"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-            />
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
         <TextView
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
@@ -160,8 +159,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
-            android:text="14.10.2011"
-            android:maxLength="10"
             app:layout_constraintRight_toLeftOf="@id/user_name"
             app:layout_constraintBottom_toBottomOf="@id/miniProfilePhotoImageView" />
 
@@ -170,17 +167,45 @@
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/add_outfit_button"
             android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:background="@drawable/search_view_background"
-            android:tint="@color/darkButtonBackground"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/background_app_accent"
+            android:tint="@color/colorPrimary"
             app:srcCompat="@drawable/ic_baseline_add_24"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/guideline1" />
+            app:layout_constraintTop_toBottomOf="@id/miniProfilePhotoImageView" />
+
+        <TextView
+            android:id="@+id/responses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:text="odpowiedzi"
+            android:textSize="20sp"
+            android:maxLength="150"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_outfit_button"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/responses_recyclerview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:layout_constraintTop_toBottomOf="@id/responses"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
-
+    </ScrollView>
 </layout>
 
 

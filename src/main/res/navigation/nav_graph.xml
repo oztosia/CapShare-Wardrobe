@@ -11,7 +11,7 @@
 
     <fragment
         android:id="@+id/AuthFragment"
-        android:name="com.example.mypersonalwardrobe.ui.auth.AuthFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.auth.AuthFragment"
         tools:layout="@layout/fragment_auth">
 
         <action
@@ -30,7 +30,7 @@
 
     <dialog
         android:id="@+id/AuthWithEmailDialogFragment"
-        android:name="com.example.mypersonalwardrobe.ui.auth.AuthWithEmailDialogFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.auth.AuthWithEmailDialogFragment"
         tools:layout="@layout/dialog_auth_with_email">
 
         <action
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/HomeFragment"
-        android:name="com.example.mypersonalwardrobe.ui.home.HomeFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.home.HomeFragment"
         android:label="Home fragment"
         tools:layout="@layout/fragment_home">
 
@@ -83,7 +83,7 @@
 
     <fragment
         android:id="@+id/AddPostFragment"
-        android:name="com.example.mypersonalwardrobe.ui.addPost.AddPostFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.addPost.AddPostFragment"
         tools:layout="@layout/fragment_add_post">
 
         <action
@@ -96,7 +96,7 @@
 
     <fragment
         android:id="@+id/ProfileFragment"
-        android:name="com.example.mypersonalwardrobe.ui.profile.ProfileFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile">
 
         <action
@@ -112,27 +112,27 @@
             app:destination="@+id/SingleImageFragment" />
 
         <action
-            android:id="@+id/action_ProfileFragment_to_EditProfileDialogFragment"
-            app:destination="@+id/EditProfileDialogFragment" />
+            android:id="@+id/action_ProfileFragment_to_EditProfileFragment"
+            app:destination="@+id/EditProfileFragment" />
 
     </fragment>
 
 
-    <dialog
-        android:id="@+id/EditProfileDialogFragment"
-        android:name="com.example.mypersonalwardrobe.ui.profile.EditProfileDialogFragment"
-        tools:layout="@layout/dialog_edit_profile">
+    <fragment
+        android:id="@+id/EditProfileFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.profile.EditProfileFragment"
+        tools:layout="@layout/fragment_edit_profile">
 
         <action
             android:id="@+id/action_editProfileFragment_to_photoBottomSheet"
             app:destination="@+id/photoBottomSheet" />
-    </dialog>
+    </fragment>
 
     <!-- ITEMS -->
 
     <fragment
         android:id="@+id/GalleryFragment"
-        android:name="com.example.mypersonalwardrobe.ui.gallery.GalleryFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.gallery.GalleryFragment"
         tools:layout="@layout/fragment_base_recyclerview_with_search">
         <action
             android:id="@+id/action_galleryFragment_to_photoBottomSheet"
@@ -149,7 +149,7 @@
 
     <dialog
         android:id="@+id/photoBottomSheet"
-        android:name="com.example.mypersonalwardrobe.ui.addImage.PhotoBottomSheet">
+        android:name="com.oztosia.capsharewardrobe.ui.addImage.PhotoBottomSheet">
 
         <action
             android:id="@+id/action_photoBottomSheet_to_newPhotoFragment"
@@ -159,31 +159,33 @@
 
     <fragment
         android:id="@+id/NewImageFragment"
-        android:name="com.example.mypersonalwardrobe.ui.addImage.NewImageFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.addImage.NewImageFragment"
         tools:layout="@layout/fragment_new_image">
     </fragment>
 
-    <!-- OUTFITS -->
+
+
+    <fragment
+        android:id="@+id/OutfitCreateFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.outfits.OutfitCreateFragment"
+        tools:layout="@layout/fragment_outfit_create">
+    </fragment>
+
+    <action
+        android:id="@+id/action_OutfitCreateFragment_to_GalleryFragment"
+        app:destination="@id/GalleryFragment" />
+
+    <!-- ASK FOR OUTFIT -->
     <fragment
         android:id="@+id/OutfitsFragment"
-        android:name="com.example.mypersonalwardrobe.ui.outfits.OutfitsFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.outfits.OutfitsFragment"
         tools:layout="@layout/fragment_outfits">
-    </fragment>
-    <!-- ASK FOR OUTFIT -->
-
-
-    <fragment
-        android:id="@+id/AskForOutfitFragment"
-        android:name="com.example.mypersonalwardrobe.ui.outfitAsks.AskForOutfitFragment"
-        tools:layout="@layout/fragment_base_recyclerview_with_search">
         <action
             android:id="@+id/action_AskForOutfitFragment_to_AddOutfitAskFragment"
             app:destination="@id/AddOutfitAskFragment" />
-
         <action
             android:id="@+id/action_AskForOutfitFragment_to_SingleOutfitAskFragment"
-            app:destination="@id/SingleOutfitAskFragment" />
-
+            app:destination="@id/OutfitAskFragment" />
         <action
             android:id="@+id/action_AskForOutfitFragment_to_SingleImageFragment"
             app:destination="@+id/SingleImageFragment" />
@@ -191,54 +193,63 @@
 
 
     <fragment
-        android:id="@+id/SingleOutfitAskFragment"
-        android:name="com.example.mypersonalwardrobe.ui.outfitAsks.SingleOutfitAskFragment"
+        android:id="@+id/OutfitAskFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.outfitAsks.OutfitAskFragment"
         tools:layout="@layout/fragment_outfit_ask">
         <action
-            android:id="@+id/action_SingleOutfitAskFragment_to_SingleImageFragment"
+            android:id="@+id/action_OutfitAskFragment_to_SingleImageFragment"
             app:destination="@+id/SingleImageFragment" />
+        <action
+            android:id="@+id/action_OutfitAskFragment_to_OutfitCreateFragment"
+            app:destination="@+id/OutfitCreateFragment" />
+        <action
+            android:id="@+id/action_OutfitAskFragment_to_OutfitFragment"
+            app:destination="@+id/OutfitFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/OutfitFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.outfits.OutfitFragment"
+        tools:layout="@layout/fragment_outfit">
     </fragment>
 
     <fragment
         android:id="@+id/AddOutfitAskFragment"
-        android:name="com.example.mypersonalwardrobe.ui.outfitAsks.AddOutfitAskFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.outfitAsks.AddOutfitAskFragment"
         tools:layout="@layout/fragment_add_post">
-
         <action
             android:id="@+id/action_AddOutfitAskFragment_to_GalleryFragment"
             app:destination="@id/GalleryFragment" />
 
-        <!-- single item view -->
     </fragment>
 
     <!-- CONTACTS -->
 
     <fragment
         android:id="@+id/UsersListFragment"
-        android:name="com.example.mypersonalwardrobe.ui.usersList.UsersListFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.usersList.UsersListFragment"
         tools:layout="@layout/fragment_base_recyclerview_with_search">
-
         <action
             android:id="@+id/action_UsersListFragment_to_ViewProfileFragment"
             app:destination="@id/ProfileFragment" />
-
     </fragment>
 
     <fragment
         android:id="@+id/PreferencesFragment"
-        android:name="com.example.mypersonalwardrobe.ui.preferences.PreferencesFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.preferences.PreferencesFragment"
         tools:layout="@layout/fragment_preferences">
     </fragment>
 
     <dialog
         android:id="@+id/SingleImageFragment"
-        android:name="com.example.mypersonalwardrobe.ui.singleImage.SingleImageFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.singleImage.SingleImageFragment"
         tools:layout="@layout/popup_photo">
     </dialog>
 
     <fragment
         android:id="@+id/ChatFragment"
-        android:name="com.example.mypersonalwardrobe.ui.chat.ChatFragment"
+        android:name="com.oztosia.capsharewardrobe.ui.chat.ChatFragment"
         tools:layout="@layout/fragment_chat">
         <action
             android:id="@+id/action_ChatFragment_to_photoBottomSheet"

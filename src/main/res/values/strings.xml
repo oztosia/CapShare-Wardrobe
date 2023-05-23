@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyPersonalWardrobe</string>
+    <string name="app_name">CapShare Wardrobe</string>
     <string name = "sign_in"><u> Masz już konto? Zaloguj się</u></string>
     <string name = "sign_up"><u>Nie masz konta? Zarejestruj się</u></string>
     <string name = "google">google</string>
@@ -9,7 +9,8 @@
     <string name = "facebook">facebook</string>
     <string name = "button_sign_in">zaloguj</string>
     <string name = "choose_auth_method">Wybierz metodę logowania:</string>
-    <string name="facebook_app_id">3157830141181901</string>
+    <string name="facebook_app_id">732618728560798</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
-    <string name="facebook_client_token">f8e86a2247bf0b39f3bb02e5fe0e1dbb</string>
+    <string name="facebook_client_token">16b86f1e1e8d157ad7c2acf8cd4c473b</string>
+    <string name="rate">oceń</string>
 </resources>

@@ -4,7 +4,10 @@ android:shape="rectangle" >
     <corners
         android:radius="20dp"
         />
+    <stroke
+        android:width="1dp"
+        android:color="@color/lightButtonBackground" />
 <solid
-    android:color="@color/colorAppBackground"
+    android:color="@color/colorPrimary"
     />
 </shape>
